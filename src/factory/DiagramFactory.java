@@ -1,4 +1,4 @@
-package lib;
+package factory;
 
 import handler.MouseEventHandler;
 import java.util.Collection;
@@ -6,6 +6,7 @@ import java.util.HashSet;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lib.Transition;
 
 /**
  * @author laki
