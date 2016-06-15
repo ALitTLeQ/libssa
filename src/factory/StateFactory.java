@@ -1,4 +1,4 @@
-package lib;
+package factory;
 
 import javafx.scene.Cursor;
 import javafx.scene.Group;

@@ -1,5 +1,6 @@
 package lib;
 
+import factory.TransitionFactory;
 import javafx.scene.Group;
 
 /**
@@ -8,21 +9,21 @@ import javafx.scene.Group;
 public class Transition {
 
     private final Group transitionView;
-    private final Group stateFrom;
-    private final Group stateTo;
+    private final State stateFrom;
+    private final State stateTo;
 
-    public Transition(Group transitionView, Group stateFrom, Group stateTo) {
-        this.transitionView = transitionView;
+    public Transition(State stateFrom, State stateTo, String name) {
         this.stateFrom = stateFrom;
         this.stateTo = stateTo;
+        transitionView = TransitionFactory.createTransition(stateFrom.getStateGroup(), stateTo.getStateGroup(), name);
     }
 
     public Group getStateFrom() {
-        return stateFrom;
+        return stateFrom.getStateGroup();
     }
 
     public Group getStateTo() {
-        return stateTo;
+        return stateTo.getStateGroup();
     }
 
     public Group getTransitionView() {
