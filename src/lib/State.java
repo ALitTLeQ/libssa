@@ -9,6 +9,8 @@ import javafx.scene.Group;
 public class State {
 
     private Group stateGroup;
+    private int transitionsTo;
+    private int transitionsFrom;
 
     public enum Type {
         INITIAL, TRANSITIONAL, FINAL
@@ -30,5 +32,21 @@ public class State {
     public Group getStateGroup() {
         return stateGroup;
     }
-    
+
+    public int getTransitionsFrom() {
+        return transitionsFrom;
+    }
+
+    public int getTransitionsTo() {
+        return transitionsTo;
+    }
+
+    public void newTransition(boolean from) {
+        if (from) {
+            transitionsFrom++;
+        } else {
+            transitionsTo++;
+        }
+    }
+
 }

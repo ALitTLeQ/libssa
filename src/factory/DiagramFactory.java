@@ -19,11 +19,11 @@ public class DiagramFactory {
         for (Transition transition : transitions) {
             root.getChildren().add(transition.getTransitionView());
         }
-        MouseEventHandler.transitions = transitions;
+        MouseEventHandler.setTransitions(transitions);
 
         for (State state : states) {
             state.getStateGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
-            state.getStateGroup().setOnMouseDragged(MouseEventHandler.onMouseDraggedEventHandler);
+            state.getStateGroup().setOnMouseDragged(MouseEventHandler.onMouseStateDraggedEventHandler);
             root.getChildren().add(state.getStateGroup());
         }
 

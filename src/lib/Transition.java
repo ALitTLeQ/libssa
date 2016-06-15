@@ -15,14 +15,14 @@ public class Transition {
     public Transition(State stateFrom, State stateTo, String name) {
         this.stateFrom = stateFrom;
         this.stateTo = stateTo;
-        transitionView = TransitionFactory.createTransition(stateFrom.getStateGroup(), stateTo.getStateGroup(), name);
+        transitionView = TransitionFactory.createTransition(stateFrom, stateTo, name);
     }
 
-    public Group getStateFrom() {
+    public Group getStateFromGroup() {
         return stateFrom.getStateGroup();
     }
 
-    public Group getStateTo() {
+    public Group getStateToGroup() {
         return stateTo.getStateGroup();
     }
 

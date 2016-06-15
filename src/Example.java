@@ -1,5 +1,3 @@
-package example;
-
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.application.Application;
