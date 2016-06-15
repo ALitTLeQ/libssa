@@ -12,13 +12,8 @@ import javafx.stage.Stage;
  */
 public class DiagramFactory {
 
-    private static final Collection<Group> states = new HashSet<>();
-    private static final Collection<Transition> transitions = new HashSet<>();
-
-    public static void createStage(Stage primaryStage, Collection<Group> stateCollection, Collection<Transition> transitionCollection) {
+    public static void createStage(Stage primaryStage, Collection<Group> states, Collection<Transition> transitions) {
         Group root = new Group();
-        states.addAll(stateCollection);
-        transitions.addAll(transitionCollection);
 
         for (Transition transition : transitions) {
             root.getChildren().addAll(transition.getTransitionView());
