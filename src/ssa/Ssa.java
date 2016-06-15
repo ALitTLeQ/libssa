@@ -36,12 +36,6 @@ public class Ssa extends Application {
         states.add(transState1);
         Group transState2 = StateFactory.createTransitionalState("t2", calcX(), calcY());
         states.add(transState2);
-        
-        for (Group group : states) {
-            group.setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
-            group.setOnMouseDragged(MouseEventHandler.onMouseDraggedEventHandler);
-        }
-        root.getChildren().addAll(states);
 
         transitions.add(TransitionFactory.createTransition(initialState, transState1, "tr1"));
         transitions.add(TransitionFactory.createTransition(transState1, transState2, "tr2"));
@@ -50,6 +44,12 @@ public class Ssa extends Application {
             root.getChildren().addAll(transition.getTransitionView());
         }
         MouseEventHandler.transitions = transitions;
+        
+        for (Group group : states) {
+            group.setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
+            group.setOnMouseDragged(MouseEventHandler.onMouseDraggedEventHandler);
+        }
+        root.getChildren().addAll(states);
                 
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
