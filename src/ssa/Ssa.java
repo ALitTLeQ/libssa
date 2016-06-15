@@ -1,21 +1,21 @@
-package example;
+package ssa;
 
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.stage.Stage;
-import factory.DiagramFactory;
-import factory.StateFactory;
+import lib.DiagramFactory;
+import lib.StateFactory;
 import lib.Transition;
-import factory.TransitionFactory;
+import lib.TransitionFactory;
 
 /**
  * example - how to use
  *
  * @author laki
  */
-public class Example extends Application {
+public class Ssa extends Application {
 
     public static void main(String[] args) {
         launch(args);

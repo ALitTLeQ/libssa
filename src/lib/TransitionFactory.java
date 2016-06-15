@@ -1,9 +1,8 @@
-package factory;
+package lib;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import lib.Transition;
 
 /**
  * creates transition with line, text and arrow
