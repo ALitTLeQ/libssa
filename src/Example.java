@@ -44,6 +44,7 @@ public class Example extends Application {
 
         // create stage priview
         DiagramFactory.createStage(primaryStage, states, transitions);
+        primaryStage.setTitle("Example");
         primaryStage.show();
     }
 

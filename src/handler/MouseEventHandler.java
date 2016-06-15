@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
+import lib.Arrow;
 import lib.Transition;
 
 /**
@@ -111,6 +112,12 @@ public class MouseEventHandler {
             Text lineText = (Text) node;
             lineText.setTranslateX((ccX + (csX + ceX) / 2) / 2);
             lineText.setTranslateY((ccY + (csY + ceY) / 2) / 2);
+        }
+        if (node instanceof Arrow) {
+            Arrow arrow = (Arrow) node;
+            arrow.setTranslateX((ccX + (csX + ceX) / 2) / 2);
+            arrow.setTranslateY((ccY + (csY + ceY) / 2) / 2);
+            arrow.setAngle(ceX, ceY);
         }
     }
 

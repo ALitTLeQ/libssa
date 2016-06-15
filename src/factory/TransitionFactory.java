@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
+import lib.Arrow;
 import lib.State;
 
 /**
@@ -14,8 +15,6 @@ import lib.State;
  */
 public class TransitionFactory {
 
-    // verovatno jos 2 manje linije sa strana i spojim onim shape union da budu kao strelica, 
-    // ali onda u handleru posmatram kao shape ne kao Group
     public static Group createTransition(State fromState, State toState, String text) {
         Group from = fromState.getStateGroup();
         Group to = toState.getStateGroup();
@@ -31,16 +30,19 @@ public class TransitionFactory {
         double curveControlX = (fromX + toX) / 2 + (transFrom % 2 == 0 ? transFrom : -transFrom) * 30;
         double curveControlY = (fromY + toY) / 2;
 
-        QuadCurve line = new QuadCurve(fromX, fromY, curveControlX, curveControlY, toX, toY);
-        line.setStroke(Color.BLACK);
-        line.setStrokeWidth(1);
-        line.setFill(null);
+        QuadCurve curve = new QuadCurve(fromX, fromY, curveControlX, curveControlY, toX, toY);
+        curve.setStroke(Color.BLACK);
+        curve.setStrokeWidth(1);
+        curve.setFill(null);
 
         Text lineText = new Text(text);
         lineText.setTranslateX(curveControlX);
         lineText.setTranslateY(curveControlY);
         lineText.setCursor(Cursor.MOVE);
-        return new Group(line, lineText);
+
+        Arrow arrow = new Arrow(curve);
+        arrow.setCursor(Cursor.MOVE);
+        return new Group(curve, lineText, arrow);
     }
 
 }
