@@ -27,7 +27,8 @@ public class TransitionFactory {
         double toX = to.getTranslateX();
         double toY = to.getTranslateY();
 
-        double curveControlX = (fromX + toX) / 2;
+        int transFrom = fromState.getTransitionsFrom();
+        double curveControlX = (fromX + toX) / 2 + (transFrom % 2 == 0 ? transFrom : -transFrom) * 30;
         double curveControlY = (fromY + toY) / 2;
 
         QuadCurve line = new QuadCurve(fromX, fromY, curveControlX, curveControlY, toX, toY);

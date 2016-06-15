@@ -10,11 +10,15 @@ import javafx.scene.text.Text;
 import lib.Transition;
 
 /**
- * class handles state dragging, and moves transitions which from/to state moved
+ * class handles state and transition dragging
  *
  * @author laki
  */
 public class MouseEventHandler {
+
+    private static final int DRAGGED_STATE_FROM = 1;
+    private static final int DRAGGED_STATE_TO = 2;
+    private static final int DRAGGED_TRANSITION = 3;
 
     private static Collection<Transition> transitions;
     static double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY; // for state drag control
@@ -52,42 +56,12 @@ public class MouseEventHandler {
             for (Transition transition : transitions) {
                 if (draggedState.equals(transition.getStateFromGroup())) {
                     for (Node node : transition.getTransitionView().getChildren()) {
-                        if (node instanceof QuadCurve) {
-                            QuadCurve curve = (QuadCurve) node;
-                            curve.setStartX(newTranslateX);
-                            curve.setStartY(newTranslateY);
-                            csX = curve.getStartX();
-                            csY = curve.getStartY();
-                            ceX = curve.getEndX();
-                            ceY = curve.getEndY();
-                            ccX = curve.getControlX();
-                            ccY = curve.getControlY();
-                        }
-                        if (node instanceof Text) {
-                            Text lineText = (Text) node;
-                            lineText.setTranslateX((ccX + (csX + ceX) / 2) / 2);
-                            lineText.setTranslateY((ccY + (csY + ceY) / 2) / 2);
-                        }
+                        moveNode(node, newTranslateX, newTranslateY, DRAGGED_STATE_FROM);
                     }
                 }
                 if (draggedState.equals(transition.getStateToGroup())) {
                     for (Node node : transition.getTransitionView().getChildren()) {
-                        if (node instanceof QuadCurve) {
-                            QuadCurve curve = (QuadCurve) node;
-                            curve.setEndX(newTranslateX);
-                            curve.setEndY(newTranslateY);
-                            csX = curve.getStartX();
-                            csY = curve.getStartY();
-                            ceX = curve.getEndX();
-                            ceY = curve.getEndY();
-                            ccX = curve.getControlX();
-                            ccY = curve.getControlY();
-                        }
-                        if (node instanceof Text) {
-                            Text lineText = (Text) node;
-                            lineText.setTranslateX((ccX + (csX + ceX) / 2) / 2);
-                            lineText.setTranslateY((ccY + (csY + ceY) / 2) / 2);
-                        }
+                        moveNode(node, newTranslateX, newTranslateY, DRAGGED_STATE_TO);
                     }
                 }
             }
@@ -105,26 +79,39 @@ public class MouseEventHandler {
             Group draggedTransitionGroup = (Group) (t.getSource());
 
             for (Node node : draggedTransitionGroup.getChildren()) {
-                if (node instanceof QuadCurve) {
-                    QuadCurve curve = (QuadCurve) node;
-                    curve.setControlX(newTranslateX);
-                    curve.setControlY(newTranslateY);
-                    csX = curve.getStartX();
-                    csY = curve.getStartY();
-                    ceX = curve.getEndX();
-                    ceY = curve.getEndY();
-                    ccX = curve.getControlX();
-                    ccY = curve.getControlY();
-                }
-            }
-            for (Node node : draggedTransitionGroup.getChildren()) {
-                if (node instanceof Text) {
-                    Text lineText = (Text) node;
-                    lineText.setTranslateX((ccX + (csX + ceX) / 2) / 2);
-                    lineText.setTranslateY((ccY + (csY + ceY) / 2) / 2);
-                }
+                moveNode(node, newTranslateX, newTranslateY, DRAGGED_TRANSITION);
             }
         }
     };
+
+    private static void moveNode(Node node, double newTranslateX, double newTranslateY, int action) {
+        if (node instanceof QuadCurve) {
+            QuadCurve curve = (QuadCurve) node;
+            switch (action) {
+                case DRAGGED_STATE_FROM:
+                    curve.setStartX(newTranslateX);
+                    curve.setStartY(newTranslateY);
+                    break;
+                case DRAGGED_STATE_TO:
+                    curve.setEndX(newTranslateX);
+                    curve.setEndY(newTranslateY);
+                    break;
+                case DRAGGED_TRANSITION:
+                    curve.setControlX(newTranslateX);
+                    curve.setControlY(newTranslateY);
+            }
+            csX = curve.getStartX();
+            csY = curve.getStartY();
+            ceX = curve.getEndX();
+            ceY = curve.getEndY();
+            ccX = curve.getControlX();
+            ccY = curve.getControlY();
+        }
+        if (node instanceof Text) {
+            Text lineText = (Text) node;
+            lineText.setTranslateX((ccX + (csX + ceX) / 2) / 2);
+            lineText.setTranslateY((ccY + (csY + ceY) / 2) / 2);
+        }
+    }
 
 }

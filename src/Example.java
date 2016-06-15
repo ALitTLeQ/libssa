@@ -37,7 +37,9 @@ public class Example extends Application {
 
         // create transitions and add to collection
         transitions.add(new Transition(initialState, transState1, "tr1"));
-        transitions.add(new Transition(transState1, transState2, "tr2"));
+        transitions.add(new Transition(transState1, transState2, "tr21"));
+        transitions.add(new Transition(transState1, transState2, "tr22"));
+        transitions.add(new Transition(transState1, transState2, "tr23"));
         transitions.add(new Transition(transState2, finalState, "tr3"));
 
         // create stage priview
