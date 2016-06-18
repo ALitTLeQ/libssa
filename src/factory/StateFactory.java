@@ -64,11 +64,11 @@ public class StateFactory {
 
     // izracunaj x koordinatu novog state-a - srediti ovaj algoritam !!!
     private static int calcX() {
-        return stateCount * 100;
+        return stateCount * 150;
     }
 
     private static int calcY() {
-        return stateCount * 100;
+        return stateCount * 150;
     }
 
 }

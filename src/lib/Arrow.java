@@ -32,7 +32,6 @@ public class Arrow extends Polygon {
     }
 
     public void setAngle(double endX, double endY) {
-        rotate.setAngle(0);
         double angle = Math.atan2(endY, endX);
         angle = Math.toDegrees(angle);
         rotate.setAngle(angle + 90);

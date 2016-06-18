@@ -117,7 +117,7 @@ public class MouseEventHandler {
             Arrow arrow = (Arrow) node;
             arrow.setTranslateX((ccX + (csX + ceX) / 2) / 2);
             arrow.setTranslateY((ccY + (csY + ceY) / 2) / 2);
-            arrow.setAngle(ceX, ceY);
+            arrow.setAngle(ceX - ccX, ceY - ccY);
         }
     }
 
