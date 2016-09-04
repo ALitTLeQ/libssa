@@ -28,18 +28,27 @@ public class Example extends Application {
         State finalState = new State(State.Type.FINAL, null);
         State transState1 = new State(State.Type.TRANSITIONAL, "t1");
         State transState2 = new State(State.Type.TRANSITIONAL, "t2");
+        State transState3 = new State(State.Type.TRANSITIONAL, "t3");
+        State transState4 = new State(State.Type.TRANSITIONAL, "t4");
 
         // add them to collection
         states.add(initialState);
         states.add(finalState);
         states.add(transState1);
         states.add(transState2);
+        states.add(transState3);
+        states.add(transState4);
 
         // create transitions and add to collection
         transitions.add(new Transition(initialState, transState1, "tr1"));
         transitions.add(new Transition(transState1, transState2, "tr21"));
         transitions.add(new Transition(transState1, transState2, "tr22"));
         transitions.add(new Transition(transState1, transState2, "tr23"));
+        transitions.add(new Transition(transState2, transState3, "tr23"));
+        transitions.add(new Transition(transState2, transState3, "tr23"));
+        transitions.add(new Transition(transState1, transState3, "tr23"));
+        transitions.add(new Transition(transState3, transState4, "tr23"));
+        transitions.add(new Transition(transState4, transState2, "tr23"));
         transitions.add(new Transition(transState2, finalState, "tr3"));
 
         // create stage priview
