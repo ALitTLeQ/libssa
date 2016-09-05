@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import factory.DiagramFactory;
 import lib.Transition;
+import lib.Entity;
 import lib.State;
 
 /**
@@ -20,16 +21,16 @@ public class Example extends Application {
     @Override
     public void start(Stage primaryStage) {
         // create collections
-        Collection<State> states = new HashSet<>();
+        Collection<Entity> states = new HashSet<>();
         Collection<Transition> transitions = new HashSet<>();
 
         // create states
-        State initialState = new State(State.Type.INITIAL, null);
-        State finalState = new State(State.Type.FINAL, null);
-        State transState1 = new State(State.Type.TRANSITIONAL, "t1");
-        State transState2 = new State(State.Type.TRANSITIONAL, "t2");
-        State transState3 = new State(State.Type.TRANSITIONAL, "t3");
-        State transState4 = new State(State.Type.TRANSITIONAL, "t4");
+        Entity initialState = new State(State.StateType.INITIAL, null);
+        Entity finalState = new State(State.StateType.FINAL, null);
+        Entity transState1 = new State(State.StateType.TRANSITIONAL, "t1");
+        Entity transState2 = new State(State.StateType.TRANSITIONAL, "t2");
+        Entity transState3 = new State(State.StateType.TRANSITIONAL, "t3");
+        Entity transState4 = new State(State.StateType.TRANSITIONAL, "t4");
 
         // add them to collection
         states.add(initialState);

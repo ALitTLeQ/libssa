@@ -1,52 +1,35 @@
 package lib;
 
 import factory.StateFactory;
-import javafx.scene.Group;
 
 /**
  * @author laki
  */
-public class State {
+public class State extends Entity {
 
-    private Group stateGroup;
-    private int transitionsTo;
-    private int transitionsFrom;
-
-    public enum Type {
+    private StateType type;
+    
+    public enum StateType {
         INITIAL, TRANSITIONAL, FINAL
     }
-
-    public State(Type type, String name) {
+    
+    public State(StateType type, String name) {
+        super(name);
+        this.type = type;
         switch (type) {
             case INITIAL:
-                stateGroup = StateFactory.createInitialState();
+                entityGroup = StateFactory.createInitialState();
                 break;
             case FINAL:
-                stateGroup = StateFactory.createFinalState();
+                entityGroup = StateFactory.createFinalState();
                 break;
             case TRANSITIONAL:
-                stateGroup = StateFactory.createTransitionalState(name);
+                entityGroup = StateFactory.createTransitionalState(name);
         }
     }
 
-    public Group getStateGroup() {
-        return stateGroup;
+    public StateType getType() {
+        return type;
     }
-
-    public int getTransitionsFrom() {
-        return transitionsFrom;
-    }
-
-    public int getTransitionsTo() {
-        return transitionsTo;
-    }
-
-    public void newTransition(boolean from) {
-        if (from) {
-            transitionsFrom++;
-        } else {
-            transitionsTo++;
-        }
-    }
-
+    
 }

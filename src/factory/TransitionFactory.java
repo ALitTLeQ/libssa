@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
 import lib.Arrow;
-import lib.State;
+import lib.Entity;
 
 /**
  * creates transition with line, text and arrow
@@ -15,18 +15,16 @@ import lib.State;
  */
 public class TransitionFactory {
 
-    public static Group createTransition(State fromState, State toState, String text) {
-        Group from = fromState.getStateGroup();
-        Group to = toState.getStateGroup();
-        fromState.newTransition(true);
-        toState.newTransition(false);
+    public static Group createTransition(Entity fromEntity, Entity toEntity, String text) {
+        Group from = fromEntity.getEntityGroup();
+        Group to = toEntity.getEntityGroup();
 
         double fromX = from.getTranslateX();
         double fromY = from.getTranslateY();
         double toX = to.getTranslateX();
         double toY = to.getTranslateY();
 
-        int transFrom = fromState.getTransitionsFrom();
+        int transFrom = fromEntity.getTransitionsFrom().size();
         double curveControlX = (fromX + toX) / 2 + (transFrom % 2 == 0 ? transFrom : -transFrom) * 30;
         double curveControlY = (fromY + toY) / 2;
 

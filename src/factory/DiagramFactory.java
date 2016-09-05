@@ -5,7 +5,7 @@ import java.util.Collection;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import lib.State;
+import lib.Entity;
 import lib.Transition;
 
 /**
@@ -13,7 +13,7 @@ import lib.Transition;
  */
 public class DiagramFactory {
 
-    public static void createStage(Stage primaryStage, Collection<State> states, Collection<Transition> transitions) {
+    public static void createStage(Stage primaryStage, Collection<Entity> entities, Collection<Transition> transitions) {
         Group root = new Group();
 
         for (Transition transition : transitions) {
@@ -21,10 +21,10 @@ public class DiagramFactory {
         }
         MouseEventHandler.setTransitions(transitions);
 
-        for (State state : states) {
-            state.getStateGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
-            state.getStateGroup().setOnMouseDragged(MouseEventHandler.onMouseStateDraggedEventHandler);
-            root.getChildren().add(state.getStateGroup());
+        for (Entity entity : entities) {
+            entity.getEntityGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
+            entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onMouseStateDraggedEventHandler);
+            root.getChildren().add(entity.getEntityGroup());
         }
 
         primaryStage.setScene(new Scene(root, 600, 600));

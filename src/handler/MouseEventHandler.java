@@ -17,12 +17,10 @@ import lib.Transition;
  */
 public class MouseEventHandler {
 
-    private static final int DRAGGED_STATE_FROM = 1;
-    private static final int DRAGGED_STATE_TO = 2;
-    private static final int DRAGGED_TRANSITION = 3;
-
+    enum Dragged { ENTITY_FROM, ENTITY_TO, TRANSITION }
+    
     private static Collection<Transition> transitions;
-    static double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY; // for state drag control
+    static double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY; // for entity drag control
     static double csX, csY, ccX, ccY, ceX, ceY; // curve start, control and end coordinates
 
     public static void setTransitions(Collection<Transition> transitions) {
@@ -50,19 +48,19 @@ public class MouseEventHandler {
             double newTranslateX = orgTranslateX + offsetX;
             double newTranslateY = orgTranslateY + offsetY;
 
-            Group draggedState = (Group) (t.getSource());
-            draggedState.setTranslateX(newTranslateX);
-            draggedState.setTranslateY(newTranslateY);
+            Group draggedEntity = (Group) (t.getSource());
+            draggedEntity.setTranslateX(newTranslateX);
+            draggedEntity.setTranslateY(newTranslateY);
 
             for (Transition transition : transitions) {
-                if (draggedState.equals(transition.getStateFromGroup())) {
+                if (draggedEntity.equals(transition.getEntityFromGroup())) {
                     for (Node node : transition.getTransitionView().getChildren()) {
-                        moveNode(node, newTranslateX, newTranslateY, DRAGGED_STATE_FROM);
+                        moveNode(node, newTranslateX, newTranslateY, Dragged.ENTITY_FROM);
                     }
                 }
-                if (draggedState.equals(transition.getStateToGroup())) {
+                if (draggedEntity.equals(transition.getEntityToGroup())) {
                     for (Node node : transition.getTransitionView().getChildren()) {
-                        moveNode(node, newTranslateX, newTranslateY, DRAGGED_STATE_TO);
+                        moveNode(node, newTranslateX, newTranslateY, Dragged.ENTITY_TO);
                     }
                 }
             }
@@ -80,24 +78,24 @@ public class MouseEventHandler {
             Group draggedTransitionGroup = (Group) (t.getSource());
 
             for (Node node : draggedTransitionGroup.getChildren()) {
-                moveNode(node, newTranslateX, newTranslateY, DRAGGED_TRANSITION);
+                moveNode(node, newTranslateX, newTranslateY, Dragged.TRANSITION);
             }
         }
     };
 
-    private static void moveNode(Node node, double newTranslateX, double newTranslateY, int action) {
+    private static void moveNode(Node node, double newTranslateX, double newTranslateY, Dragged dragged) {
         if (node instanceof QuadCurve) {
             QuadCurve curve = (QuadCurve) node;
-            switch (action) {
-                case DRAGGED_STATE_FROM:
+            switch (dragged) {
+                case ENTITY_FROM:
                     curve.setStartX(newTranslateX);
                     curve.setStartY(newTranslateY);
                     break;
-                case DRAGGED_STATE_TO:
+                case ENTITY_TO:
                     curve.setEndX(newTranslateX);
                     curve.setEndY(newTranslateY);
                     break;
-                case DRAGGED_TRANSITION:
+                case TRANSITION:
                     curve.setControlX(newTranslateX);
                     curve.setControlY(newTranslateY);
             }

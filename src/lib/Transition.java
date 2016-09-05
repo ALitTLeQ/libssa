@@ -9,21 +9,23 @@ import javafx.scene.Group;
 public class Transition {
 
     private final Group transitionView;
-    private final State stateFrom;
-    private final State stateTo;
+    private final Entity entityFrom;
+    private final Entity entityTo;
 
-    public Transition(State stateFrom, State stateTo, String name) {
-        this.stateFrom = stateFrom;
-        this.stateTo = stateTo;
-        transitionView = TransitionFactory.createTransition(stateFrom, stateTo, name);
+    public Transition(Entity entityFrom, Entity entityTo, String name) {
+        this.entityFrom = entityFrom;
+        this.entityTo = entityTo;
+        entityFrom.newTransition(this, true);
+        entityTo.newTransition(this, false);
+        transitionView = TransitionFactory.createTransition(entityFrom, entityTo, name);
     }
 
-    public Group getStateFromGroup() {
-        return stateFrom.getStateGroup();
+    public Group getEntityFromGroup() {
+        return entityFrom.getEntityGroup();
     }
 
-    public Group getStateToGroup() {
-        return stateTo.getStateGroup();
+    public Group getEntityToGroup() {
+        return entityTo.getEntityGroup();
     }
 
     public Group getTransitionView() {
