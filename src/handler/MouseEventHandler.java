@@ -11,7 +11,7 @@ import lib.Arrow;
 import lib.Transition;
 
 /**
- * class handles state and transition dragging
+ * class handles entity and transition dragging
  *
  * @author laki
  */
@@ -40,7 +40,7 @@ public class MouseEventHandler {
         }
     };
 
-    public static EventHandler<MouseEvent> onMouseStateDraggedEventHandler = new EventHandler<MouseEvent>() {
+    public static EventHandler<MouseEvent> onMouseEntityDraggedEventHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent t) {
             double offsetX = t.getSceneX() - orgSceneX;

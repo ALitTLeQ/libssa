@@ -23,7 +23,7 @@ public class DiagramFactory {
 
         for (Entity entity : entities) {
             entity.getEntityGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
-            entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onMouseStateDraggedEventHandler);
+            entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onMouseEntityDraggedEventHandler);
             root.getChildren().add(entity.getEntityGroup());
         }
 
