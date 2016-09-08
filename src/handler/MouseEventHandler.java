@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
 import lib.Arrow;
+import lib.Rounded;
 import lib.Transition;
 
 /**
@@ -52,15 +53,22 @@ public class MouseEventHandler {
             draggedEntity.setTranslateX(newTranslateX);
             draggedEntity.setTranslateY(newTranslateY);
 
+            int translateX = 0;
+            int translateY = 0;
+            
             for (Transition transition : transitions) {
-                if (draggedEntity.equals(transition.getEntityFromGroup())) {
+                if (draggedEntity.equals(transition.getEntityFrom().getEntityGroup())) {
+                    translateX = transition.getEntityFrom() instanceof Rounded ? 0 : 50;
+                    translateY = transition.getEntityFrom() instanceof Rounded ? 0 : 30;
                     for (Node node : transition.getTransitionView().getChildren()) {
-                        moveNode(node, newTranslateX, newTranslateY, Dragged.ENTITY_FROM);
+                        moveNode(node, newTranslateX + translateX, newTranslateY + translateY, Dragged.ENTITY_FROM);
                     }
                 }
-                if (draggedEntity.equals(transition.getEntityToGroup())) {
+                if (draggedEntity.equals(transition.getEntityTo().getEntityGroup())) {
+                    translateX = transition.getEntityTo() instanceof Rounded ? 0 : 50;
+                    translateY = transition.getEntityTo() instanceof Rounded ? 0 : 30;
                     for (Node node : transition.getTransitionView().getChildren()) {
-                        moveNode(node, newTranslateX, newTranslateY, Dragged.ENTITY_TO);
+                        moveNode(node, newTranslateX + translateX, newTranslateY + translateY, Dragged.ENTITY_TO);
                     }
                 }
             }

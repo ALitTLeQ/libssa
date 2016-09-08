@@ -20,12 +20,12 @@ public class Transition {
         transitionView = TransitionFactory.createTransition(entityFrom, entityTo, name);
     }
 
-    public Group getEntityFromGroup() {
-        return entityFrom.getEntityGroup();
+    public Entity getEntityFrom() {
+        return entityFrom;
     }
 
-    public Group getEntityToGroup() {
-        return entityTo.getEntityGroup();
+    public Entity getEntityTo() {
+        return entityTo;
     }
 
     public Group getTransitionView() {

@@ -5,7 +5,7 @@ import factory.StateFactory;
 /**
  * @author laki
  */
-public class State extends Entity {
+public class State extends Entity implements Rounded {
 
     private StateType type;
     
