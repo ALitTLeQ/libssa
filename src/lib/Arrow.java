@@ -23,9 +23,7 @@ public class Arrow extends Polygon {
         rotate.setAxis(Rotate.Z_AXIS);
 
         getTransforms().add(rotate);
-        double angle = Math.atan2(curve.getEndY(), curve.getEndX());
-        angle = Math.toDegrees(angle);
-        rotate.setAngle(angle + 90);
+        setAngle(curve.getEndX() - curve.getStartX(), curve.getEndY() - curve.getStartY() );
 
         setTranslateX(((curve.getStartX() + curve.getEndX()) / 2 + curve.getControlX()) / 2);
         setTranslateY((curve.getStartY() + curve.getEndY()) / 2);

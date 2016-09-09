@@ -5,6 +5,8 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import lib.Rounded;
 
 /**
  * @author laki
@@ -25,13 +27,7 @@ public class SsaFactory {
         rectInner.setFill(Color.WHITE);
         rectInner.setX(2);
         rectInner.setY(2);
-        Text rectText = new Text(name);
-        rectText.setWrappingWidth(80);
-        rectText.setX(50);
-        rectText.setY(30);
-        int offset = -1 * (name.length() > 25 ? 1 : (name.length() > 15 ? 2 : 3));
-        rectText.setTranslateX(name.length() * offset);
-        Group g = new Group(rectOutter, rectInner, rectText);
+        Group g = new Group(rectOutter, rectInner, formatText(name, Rectangle.class));
         if (x == 0 && y == 0) {
             x = calcX();
             y = calcY();
@@ -48,6 +44,17 @@ public class SsaFactory {
 
     private static int calcY() {
         return interfaceCount * 150;
+    }
+    
+    private static Text formatText(String t, Class c) {
+        Text text = new Text(t);
+        text.setWrappingWidth(80);
+        text.setTextAlignment(TextAlignment.CENTER);
+        if (!c.isAssignableFrom(Rounded.class)) {
+            text.setX(10);
+            text.setY(t.length() < 25 ? 30 : 15);
+        }
+        return text;
     }
 
 }
