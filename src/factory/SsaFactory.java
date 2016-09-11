@@ -3,6 +3,7 @@ package factory;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -14,6 +15,7 @@ import lib.Rounded;
 public class SsaFactory {
 
     private static int interfaceCount = 0;
+    private static int processCount = 0;
 
     public static Group createInterface(String text) {
         return createInterface(text, 0, 0);
@@ -35,6 +37,31 @@ public class SsaFactory {
         g.setTranslateX(x);
         g.setTranslateY(y);
         g.setCursor(Cursor.CROSSHAIR);
+        return g;
+    }
+
+    public static Group createProcess(String text) {
+        return createProcess(text, 0, 0);
+    }
+    
+    public static Group createProcess(String text, int x, int y) {
+        processCount++;
+        Ellipse eOutter = new Ellipse(50, 30);
+        eOutter.setFill(Color.BLACK);
+        Ellipse eInner = new Ellipse(48, 28);
+        eInner.setFill(Color.WHITE);
+        Text ellipseText = new Text(text);
+        ellipseText.setWrappingWidth(80);
+        int offset = -1 * (text.length() > 25 ? 1 : (text.length() > 15 ? 2 : 3));
+        ellipseText.setTranslateX(text.length() * offset);
+        Group g = new Group(eOutter, eInner, ellipseText);
+        if (x == 0 && y == 0) {
+            x = calcX();
+            y = calcY();
+        }
+        g.setTranslateX(x);
+        g.setTranslateY(y);
+        g.setCursor(Cursor.HAND);
         return g;
     }
     
