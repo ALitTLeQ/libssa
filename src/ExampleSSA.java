@@ -3,6 +3,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import lib.DataWarehouse;
 import lib.Entity;
 import lib.Process;
 import lib.Interface;
@@ -32,12 +33,16 @@ public class ExampleSSA extends Application {
         
         // create processes
         Entity process1 = new Process("process");
+        
+        // create data-warehouses
+        Entity dw1 = new DataWarehouse("dw1");
 
         // add them to collection
         entities.add(interface1);
         entities.add(interface2);
         entities.add(interface3);
         entities.add(process1);
+        entities.add(dw1);
 
         // create transitions and add to collection
         transitions.add(new Transition(process1, interface2, "tr11"));
@@ -49,6 +54,11 @@ public class ExampleSSA extends Application {
         transitions.add(new Transition(process1, interface2, "tr17"));
         transitions.add(new Transition(interface1, process1, "tr18"));
         transitions.add(new Transition(process1, interface1, "tr19"));
+        transitions.add(new Transition(dw1, process1, "tr19"));
+        transitions.add(new Transition(dw1, interface1, "tr19"));
+        transitions.add(new Transition(interface1, dw1, "tr19"));
+        transitions.add(new Transition(interface1, dw1, "tr19"));
+        transitions.add(new Transition(process1, dw1, "tr19"));
 
         // create stage priview
         DiagramFactory.createStage(primaryStage, entities, transitions);

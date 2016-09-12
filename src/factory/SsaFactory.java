@@ -16,11 +16,12 @@ public class SsaFactory {
 
     private static int interfaceCount = 0;
     private static int processCount = 0;
+    private static int dataWarehousesCount = 0;
 
     public static Group createInterface(String text) {
         return createInterface(text, 0, 0);
     }
-    
+
     public static Group createInterface(String name, int x, int y) {
         interfaceCount++;
         Rectangle rectOutter = new Rectangle(100, 60);
@@ -43,7 +44,7 @@ public class SsaFactory {
     public static Group createProcess(String text) {
         return createProcess(text, 0, 0);
     }
-    
+
     public static Group createProcess(String text, int x, int y) {
         processCount++;
         Ellipse eOutter = new Ellipse(50, 30);
@@ -64,15 +65,37 @@ public class SsaFactory {
         g.setCursor(Cursor.HAND);
         return g;
     }
-    
+
+    public static Group createDataWarehouse(String name) {
+        return createDataWarehouse(name, 0, 0);
+    }
+
+    public static Group createDataWarehouse(String name, int x, int y) {
+        dataWarehousesCount++;
+        Rectangle rectOutter = new Rectangle(100, 60);
+        rectOutter.setFill(Color.BLACK);
+        Rectangle rectInner = new Rectangle(100, 56);
+        rectInner.setFill(Color.WHITE);
+        rectInner.setY(2);
+        Group g = new Group(rectOutter, rectInner, formatText(name, Rectangle.class));
+        if (x == 0 && y == 0) {
+            x = calcX();
+            y = calcY();
+        }
+        g.setTranslateX(x);
+        g.setTranslateY(y);
+        g.setCursor(Cursor.CROSSHAIR);
+        return g;
+    }
+
     private static int calcX() {
-        return interfaceCount * 150;
+        return interfaceCount * 100;
     }
 
     private static int calcY() {
-        return interfaceCount * 150;
+        return interfaceCount * 100;
     }
-    
+
     private static Text formatText(String t, Class c) {
         Text text = new Text(t);
         text.setWrappingWidth(80);
