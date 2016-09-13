@@ -24,6 +24,10 @@ public abstract class Entity {
         return entityGroup;
     }
 
+    public String getName() {
+        return name;
+    }
+    
     public Collection<Transition> getTransitionsFrom() {
         return transitionsFrom;
     }

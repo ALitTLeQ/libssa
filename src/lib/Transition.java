@@ -8,6 +8,7 @@ import javafx.scene.Group;
  */
 public class Transition {
 
+    private final String name;
     private final Group transitionView;
     private final Entity entityFrom;
     private final Entity entityTo;
@@ -15,6 +16,7 @@ public class Transition {
     public Transition(Entity entityFrom, Entity entityTo, String name) {
         this.entityFrom = entityFrom;
         this.entityTo = entityTo;
+        this.name = name;
         entityFrom.newTransition(this, true);
         entityTo.newTransition(this, false);
         transitionView = TransitionFactory.createTransition(entityFrom, entityTo, name);
@@ -26,6 +28,10 @@ public class Transition {
 
     public Entity getEntityTo() {
         return entityTo;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Group getTransitionView() {

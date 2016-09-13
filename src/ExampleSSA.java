@@ -59,7 +59,7 @@ public class ExampleSSA extends Application {
         transitions.add(new Transition(interface1, dw1, "tr19"));
         transitions.add(new Transition(interface1, dw1, "tr19"));
         transitions.add(new Transition(process1, dw1, "tr19"));
-
+        
         // create stage priview
         DiagramFactory.createStage(primaryStage, entities, transitions);
         primaryStage.setTitle("Example for ssa");
