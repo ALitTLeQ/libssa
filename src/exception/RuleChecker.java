@@ -4,6 +4,7 @@ import lib.DataWarehouse;
 import lib.Entity;
 import lib.Interface;
 import lib.Transition;
+import lib.Process;
 
 /**
  * @author laki
@@ -14,31 +15,43 @@ public class RuleChecker {
     public static String ILLEGAL_TRANSITION_NAME = "Transition must have a name";
     public static String ILLEGAL_ENTITY_NAME = "Entity must have a name";
     public static String ILLEGAL_TRANSITION = "Transition must connect 2 non null entities";
+    public static String ILLEGAL_PROCESS = "Process must have at least 1 input and 1 output";
+    public static String ILLEGAL_WAREHOUSE = "DataWarehouse must have at least 1 input or output";
+    public static String ILLEGAL_INTERFACE = "Interface must have at least 1 input or output";
 
     public static void checkTransitionRules(Transition t) {
         Entity entityFrom = t.getEntityFrom();
         Entity entityTo = t.getEntityTo();
         String name = t.getName();
+        if (entityFrom == null || entityTo == null) {
+            throw new IllegalTransitionException(ILLEGAL_TRANSITION);
+        }
         if ((entityFrom instanceof DataWarehouse && entityTo instanceof DataWarehouse)
                 || (entityFrom instanceof DataWarehouse && entityTo instanceof Interface)
                 || (entityFrom instanceof Interface && entityTo instanceof DataWarehouse)
                 || (entityFrom instanceof Interface && entityTo instanceof Interface)) {
             throw new IllegalTransitionException(ILLEGAL_CONNECTION);
         }
-        if (entityFrom == null || entityTo == null) {
-            throw new IllegalTransitionException(ILLEGAL_TRANSITION);
-        }
         if (name == null || name.isEmpty()) {
-            throw new IllegalTransitionException(ILLEGAL_TRANSITION_NAME); // mozda ne mora ako je ka ili od skladista ???
+            if (!(entityFrom instanceof DataWarehouse) && !(entityTo instanceof DataWarehouse)) {
+                throw new IllegalTransitionException(ILLEGAL_TRANSITION_NAME);
+            }
         }
     }
 
     public static void checkEntityRules(Entity e) {
         String name = e.getName();
         if (name == null || name.isEmpty()) {
-            if (!(e instanceof DataWarehouse)) { // proveri ovo !!!
-                throw new IllegalTransitionException(ILLEGAL_ENTITY_NAME);
-            }
+            throw new IllegalTransitionException(ILLEGAL_ENTITY_NAME);
+        }
+        if (e instanceof Process && (e.getTransitionsFrom().isEmpty() || e.getTransitionsTo().isEmpty())) {
+            throw new IllegalTransitionException(ILLEGAL_PROCESS);
+        }
+        if (e instanceof DataWarehouse && (e.getTransitionsFrom().isEmpty() && e.getTransitionsTo().isEmpty())) {
+            throw new IllegalTransitionException(ILLEGAL_WAREHOUSE);
+        }
+        if (e instanceof Interface && (e.getTransitionsFrom().isEmpty() && e.getTransitionsTo().isEmpty())) {
+            throw new IllegalTransitionException(ILLEGAL_INTERFACE);
         }
     }
 

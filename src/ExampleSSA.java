@@ -55,9 +55,6 @@ public class ExampleSSA extends Application {
         transitions.add(new Transition(interface1, process1, "tr18"));
         transitions.add(new Transition(process1, interface1, "tr19"));
         transitions.add(new Transition(dw1, process1, "tr19"));
-        transitions.add(new Transition(dw1, interface1, "tr19"));
-        transitions.add(new Transition(interface1, dw1, "tr19"));
-        transitions.add(new Transition(interface1, dw1, "tr19"));
         transitions.add(new Transition(process1, dw1, "tr19"));
         
         // create stage priview
