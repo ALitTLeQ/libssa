@@ -11,13 +11,13 @@ import lib.Process;
  */
 public class RuleChecker {
 
-    public static String ILLEGAL_CONNECTION = "Connecting 2 DataWarehouses, 2 Interfaces or Interface and DataWareouse is illegal";
-    public static String ILLEGAL_TRANSITION_NAME = "Transition must have a name";
-    public static String ILLEGAL_ENTITY_NAME = "Entity must have a name";
-    public static String ILLEGAL_TRANSITION = "Transition must connect 2 non null entities";
-    public static String ILLEGAL_PROCESS = "Process must have at least 1 input and 1 output";
-    public static String ILLEGAL_WAREHOUSE = "DataWarehouse must have at least 1 input or output";
-    public static String ILLEGAL_INTERFACE = "Interface must have at least 1 input or output";
+    public static final String ILLEGAL_CONNECTION = "Connecting 2 DataWarehouses, 2 Interfaces or Interface and DataWareouse is illegal";
+    public static final String ILLEGAL_TRANSITION_NAME = "Transition must have a name";
+    public static final String ILLEGAL_ENTITY_NAME = "Entity must have a name";
+    public static final String ILLEGAL_TRANSITION = "Transition must connect 2 non null entities";
+    public static final String ILLEGAL_PROCESS = "Process must have at least 1 input and 1 output";
+    public static final String ILLEGAL_WAREHOUSE = "DataWarehouse must have at least 1 input or output";
+    public static final String ILLEGAL_INTERFACE = "Interface must have at least 1 input or output";
 
     public static void checkTransitionRules(Transition t) {
         Entity entityFrom = t.getEntityFrom();
