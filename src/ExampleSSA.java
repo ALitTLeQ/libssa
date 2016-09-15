@@ -3,11 +3,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import lib.DataWarehouse;
 import lib.Entity;
-import lib.Process;
-import lib.Interface;
 import lib.Transition;
+import lib.ssa.DataWarehouse;
+import lib.ssa.Process;
+import lib.ssa.Interface;
 
 /**
  * example - how to use for ssa

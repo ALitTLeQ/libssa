@@ -9,10 +9,10 @@ import javafx.scene.Group;
  */
 public abstract class Entity {
 
-    String name;
-    Group entityGroup;
-    Collection<Transition> transitionsTo;
-    Collection<Transition> transitionsFrom;
+    protected Group entityGroup;
+    private final String name;
+    private final Collection<Transition> transitionsTo;
+    private final Collection<Transition> transitionsFrom;
 
     public Entity(String name) {
         this.name = name;
@@ -27,7 +27,7 @@ public abstract class Entity {
     public String getName() {
         return name;
     }
-    
+
     public Collection<Transition> getTransitionsFrom() {
         return transitionsFrom;
     }

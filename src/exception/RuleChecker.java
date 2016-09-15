@@ -1,10 +1,10 @@
 package exception;
 
-import lib.DataWarehouse;
 import lib.Entity;
-import lib.Interface;
 import lib.Transition;
-import lib.Process;
+import lib.ssa.DataWarehouse;
+import lib.ssa.Interface;
+import lib.ssa.Process;
 
 /**
  * @author laki

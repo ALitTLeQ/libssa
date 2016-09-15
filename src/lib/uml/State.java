@@ -1,6 +1,8 @@
-package lib;
+package lib.uml;
 
 import factory.StateFactory;
+import lib.Entity;
+import lib.Rounded;
 
 /**
  * @author laki

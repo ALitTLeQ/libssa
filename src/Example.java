@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import factory.DiagramFactory;
 import lib.Transition;
 import lib.Entity;
-import lib.State;
+import lib.uml.State;
 
 /**
  * example - how to use

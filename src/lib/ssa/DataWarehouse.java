@@ -1,6 +1,7 @@
-package lib;
+package lib.ssa;
 
 import factory.SsaFactory;
+import lib.Entity;
 
 /**
  * @author laki
