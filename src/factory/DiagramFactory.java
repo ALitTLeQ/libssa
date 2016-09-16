@@ -3,8 +3,11 @@ package factory;
 import exception.RuleChecker;
 import handler.MouseEventHandler;
 import java.util.Collection;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import lib.Entity;
 import lib.Transition;
@@ -30,7 +33,19 @@ public class DiagramFactory {
             root.getChildren().add(entity.getEntityGroup());
         }
 
-        primaryStage.setScene(new Scene(root, 600, 600));
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setFitToWidth(true);
+
+        FlowPane flowPane = new FlowPane();
+        flowPane.setPadding(new Insets(10, 10, 10, 10));
+        flowPane.setHgap(10);
+        flowPane.setVgap(10);
+        
+        flowPane.getChildren().add(root);
+        
+        scrollPane.setContent(flowPane);
+        
+        primaryStage.setScene(new Scene(scrollPane, 600, 600));
     }
 
 }
