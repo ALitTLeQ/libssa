@@ -26,11 +26,11 @@ public class Example extends Application {
 
         // create states
         Entity initialState = new State(State.StateType.INITIAL, null);
-        Entity finalState = new State(State.StateType.FINAL, null);
         Entity transState1 = new State(State.StateType.TRANSITIONAL, "t1");
         Entity transState2 = new State(State.StateType.TRANSITIONAL, "t2");
         Entity transState3 = new State(State.StateType.TRANSITIONAL, "t3");
         Entity transState4 = new State(State.StateType.TRANSITIONAL, "t4");
+        Entity finalState = new State(State.StateType.FINAL, null);
 
         // add them to collection
         states.add(initialState);

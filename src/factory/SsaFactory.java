@@ -10,20 +10,21 @@ import javafx.scene.text.TextAlignment;
 import lib.Rounded;
 
 /**
+ * creates ssa entities (interface, process and data warehouse), calculates
+ * initial positions
+ *
  * @author laki
  */
 public class SsaFactory {
 
-    private static int interfaceCount = 0;
-    private static int processCount = 0;
-    private static int dataWarehousesCount = 0;
+    private static int entityCount = 0;
 
     public static Group createInterface(String text) {
         return createInterface(text, 0, 0);
     }
 
     public static Group createInterface(String name, int x, int y) {
-        interfaceCount++;
+        entityCount++;
         Rectangle rectOutter = new Rectangle(100, 60);
         rectOutter.setFill(Color.BLACK);
         Rectangle rectInner = new Rectangle(96, 56);
@@ -46,7 +47,7 @@ public class SsaFactory {
     }
 
     public static Group createProcess(String text, int x, int y) {
-        processCount++;
+        entityCount++;
         Ellipse eOutter = new Ellipse(50, 30);
         eOutter.setFill(Color.BLACK);
         Ellipse eInner = new Ellipse(48, 28);
@@ -71,7 +72,7 @@ public class SsaFactory {
     }
 
     public static Group createDataWarehouse(String name, int x, int y) {
-        dataWarehousesCount++;
+        entityCount++;
         Rectangle rectOutter = new Rectangle(100, 60);
         rectOutter.setFill(Color.BLACK);
         Rectangle rectInner = new Rectangle(100, 56);
@@ -89,11 +90,11 @@ public class SsaFactory {
     }
 
     private static int calcX() {
-        return interfaceCount * 100;
+        return ((entityCount - 1) / 3 + 1) * 200;
     }
 
     private static int calcY() {
-        return interfaceCount * 100;
+        return ((entityCount - 1) % 3 + 1) * 200;
     }
 
     private static Text formatText(String t, Class c) {

@@ -17,21 +17,23 @@ public class StateFactory {
     private static int stateCount = 0;
 
     public static Group createInitialState() {
+        stateCount++;
         Circle circle = new Circle(15, Color.BLACK);
         Group g = new Group(circle);
-        g.setTranslateX(50);
-        g.setTranslateY(50);
+        g.setTranslateX(calcX());
+        g.setTranslateY(calcY());
         g.setCursor(Cursor.HAND);
         return g;
     }
 
     public static Group createFinalState() {
+        stateCount++;
         Circle outter = new Circle(25, Color.BLACK);
         Circle middle = new Circle(20, Color.WHITE);
         Circle inner = new Circle(15, Color.BLACK);
         Group g = new Group(outter, middle, inner);
-        g.setTranslateX(570);
-        g.setTranslateY(570);
+        g.setTranslateX(calcX());
+        g.setTranslateY(calcY());
         g.setCursor(Cursor.HAND);
         return g;
     }
@@ -40,7 +42,6 @@ public class StateFactory {
         return createTransitionalState(text, 0, 0);
     }
 
-    // too much hardcoded stuff, will change later
     private static Group createTransitionalState(String text, int x, int y) {
         stateCount++;
         Ellipse eOutter = new Ellipse(50, 30);
@@ -62,13 +63,12 @@ public class StateFactory {
         return g;
     }
 
-    // izracunaj x koordinatu novog state-a - srediti ovaj algoritam !!!
     private static int calcX() {
-        return stateCount * 150;
+        return ((stateCount - 1) % 3 + 1) * 250;
     }
 
     private static int calcY() {
-        return stateCount * 150;
+        return ((stateCount - 1) / 3 + 1) * 250;
     }
 
 }

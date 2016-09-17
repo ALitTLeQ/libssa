@@ -16,7 +16,7 @@ public class State extends Entity implements Rounded {
     }
     
     public State(StateType type, String name) {
-        super(name);
+        super(type == StateType.TRANSITIONAL ? name : "default");
         this.type = type;
         switch (type) {
             case INITIAL:
