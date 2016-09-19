@@ -3,6 +3,7 @@ package factory;
 import exception.RuleChecker;
 import handler.MouseEventHandler;
 import java.util.Collection;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -41,23 +42,11 @@ public class DiagramFactory {
         flowPane.setPadding(new Insets(10, 10, 10, 10));
         flowPane.setHgap(10);
         flowPane.setVgap(10);
+        flowPane.setOnScroll(MouseEventHandler.onMouseScrolledEventHandler);
         
         flowPane.getChildren().add(root);
         
         scrollPane.setContent(flowPane);
-        
-        flowPane.setOnScroll((ScrollEvent event) -> {
-            event.consume();
-            if (event.getDeltaY() == 0) {
-                return;
-            }
-            
-            double scaleDelta = 1.1;
-            double scaleFactor = (event.getDeltaY() > 0) ? scaleDelta : 1 / scaleDelta;
-            
-            flowPane.setScaleX(flowPane.getScaleX() * scaleFactor);
-            flowPane.setScaleY(flowPane.getScaleY() * scaleFactor);
-        });
         
         primaryStage.setScene(new Scene(scrollPane, 600, 600));
     }

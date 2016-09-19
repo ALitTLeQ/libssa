@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
 import lib.Arrow;
@@ -126,5 +128,25 @@ public class MouseEventHandler {
             arrow.setAngle(ceX - csX, ceY - csY);
         }
     }
+    
+    public static EventHandler<ScrollEvent> onMouseScrolledEventHandler = new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent event) {
+                event.consume();
+                if (event.getDeltaY() == 0) {
+                    return;
+                }
+                
+                double scaleDelta = 1.1;
+                double scaleFactor = (event.getDeltaY() > 0) ? scaleDelta : 1 / scaleDelta;
+                
+                Object source = event.getSource();
+                if (source instanceof Pane) {
+                    Pane pane = (Pane) source;
+                    pane.setScaleX(pane.getScaleX() * scaleFactor);
+                    pane.setScaleY(pane.getScaleY() * scaleFactor);
+                }
+            }
+        };
 
 }
