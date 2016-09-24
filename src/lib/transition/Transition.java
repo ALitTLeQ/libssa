@@ -1,6 +1,5 @@
 package lib.transition;
 
-import factory.TransitionFactory;
 import javafx.scene.Group;
 import lib.Entity;
 

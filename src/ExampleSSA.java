@@ -5,8 +5,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import lib.Entity;
 import lib.ssa.DataWarehouse;
-import lib.ssa.Process;
 import lib.ssa.Interface;
+import lib.ssa.Process;
 import lib.transition.Transition;
 import lib.transition.FullLineTransition;
 

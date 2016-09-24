@@ -9,8 +9,8 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
-import lib.transition.Arrow;
 import lib.Rounded;
+import lib.transition.Arrow;
 import lib.transition.Transition;
 
 /**

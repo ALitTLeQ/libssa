@@ -1,8 +1,8 @@
 package lib.ssa;
 
-import lib.Rounded;
 import factory.SsaFactory;
 import lib.Entity;
+import lib.Rounded;
 
 /**
  * @author laki
