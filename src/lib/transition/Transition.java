@@ -1,15 +1,16 @@
-package lib;
+package lib.transition;
 
 import factory.TransitionFactory;
 import javafx.scene.Group;
+import lib.Entity;
 
 /**
  * @author laki
  */
-public class Transition {
+public abstract class Transition {
 
+    protected Group transitionView;
     private final String name;
-    private final Group transitionView;
     private final Entity entityFrom;
     private final Entity entityTo;
 
@@ -19,7 +20,6 @@ public class Transition {
         this.name = name;
         entityFrom.newTransition(this, true);
         entityTo.newTransition(this, false);
-        transitionView = TransitionFactory.createTransition(entityFrom, entityTo, name);
     }
 
     public Entity getEntityFrom() {

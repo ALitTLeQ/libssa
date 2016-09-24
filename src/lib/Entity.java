@@ -1,5 +1,6 @@
 package lib;
 
+import lib.transition.Transition;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.scene.Group;

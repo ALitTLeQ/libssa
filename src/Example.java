@@ -3,8 +3,9 @@ import java.util.HashSet;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import factory.DiagramFactory;
-import lib.Transition;
 import lib.Entity;
+import lib.transition.Transition;
+import lib.transition.FullLineTransition;
 import lib.uml.State;
 
 /**
@@ -41,16 +42,16 @@ public class Example extends Application {
         states.add(transState4);
 
         // create transitions and add to collection
-        transitions.add(new Transition(initialState, transState1, "tr1"));
-        transitions.add(new Transition(transState1, transState2, "tr21"));
-        transitions.add(new Transition(transState1, transState2, "tr22"));
-        transitions.add(new Transition(transState1, transState2, "tr23"));
-        transitions.add(new Transition(transState2, transState3, "tr23"));
-        transitions.add(new Transition(transState2, transState3, "tr23"));
-        transitions.add(new Transition(transState1, transState3, "tr23"));
-        transitions.add(new Transition(transState3, transState4, "tr23"));
-        transitions.add(new Transition(transState4, transState2, "tr23"));
-        transitions.add(new Transition(transState2, finalState, "tr3"));
+        transitions.add(new FullLineTransition(initialState, transState1, "tr1"));
+        transitions.add(new FullLineTransition(transState1, transState2, "tr21"));
+        transitions.add(new FullLineTransition(transState1, transState2, "tr22"));
+        transitions.add(new FullLineTransition(transState1, transState2, "tr23"));
+        transitions.add(new FullLineTransition(transState2, transState3, "tr23"));
+        transitions.add(new FullLineTransition(transState2, transState3, "tr23"));
+        transitions.add(new FullLineTransition(transState1, transState3, "tr23"));
+        transitions.add(new FullLineTransition(transState3, transState4, "tr23"));
+        transitions.add(new FullLineTransition(transState4, transState2, "tr23"));
+        transitions.add(new FullLineTransition(transState2, finalState, "tr3"));
 
         // create stage priview
         DiagramFactory.createStage(primaryStage, states, transitions);

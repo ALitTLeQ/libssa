@@ -1,7 +1,7 @@
 package exception;
 
 import lib.Entity;
-import lib.Transition;
+import lib.transition.Transition;
 import lib.ssa.DataWarehouse;
 import lib.ssa.Interface;
 import lib.ssa.Process;

@@ -9,9 +9,9 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
-import lib.Arrow;
+import lib.transition.Arrow;
 import lib.Rounded;
-import lib.Transition;
+import lib.transition.Transition;
 
 /**
  * class handles entity and transition dragging

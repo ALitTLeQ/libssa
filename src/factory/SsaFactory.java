@@ -58,8 +58,8 @@ public class SsaFactory {
         ellipseText.setTranslateX(text.length() * offset);
         Group g = new Group(eOutter, eInner, ellipseText);
         if (x == 0 && y == 0) {
-            x = calcX();
-            y = calcY();
+            x = calcX() + 50;
+            y = calcY() + 30;
         }
         g.setTranslateX(x);
         g.setTranslateY(y);

@@ -5,7 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
-import lib.Arrow;
+import lib.transition.Arrow;
 import lib.Entity;
 import lib.Rounded;
 

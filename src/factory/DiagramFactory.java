@@ -12,7 +12,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import lib.Entity;
-import lib.Transition;
+import lib.transition.Transition;
 
 /**
  * @author laki
