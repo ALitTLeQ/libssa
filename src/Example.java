@@ -54,7 +54,7 @@ public class Example extends Application {
         transitions.add(new FullLineTransition(transState2, finalState, "tr3"));
 
         // create stage priview
-        DiagramFactory.createStage(primaryStage, states, transitions);
+        DiagramFactory.createStage(primaryStage, states, transitions, true);
         primaryStage.setTitle("Example");
         primaryStage.show();
     }
