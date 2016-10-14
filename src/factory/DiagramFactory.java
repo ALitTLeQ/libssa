@@ -30,26 +30,29 @@ import lib.transition.Transition;
  */
 public class DiagramFactory {
 
-    public static void createStage(Stage primaryStage, Collection<Entity> entities, Collection<Transition> transitions, boolean wantExportButtons) {
+    public static boolean SHOW_EXPORT_BUTTONS = false;
+    public static boolean CHECK_SSA_RULES = false;
+    
+    public static void createStage(Stage primaryStage, Collection<Entity> entities, Collection<Transition> transitions) {
         Group root = new Group();
 
         // add transitions
         for (Transition transition : transitions) {
-            RuleChecker.checkTransitionRules(transition);
+            if(CHECK_SSA_RULES) RuleChecker.checkTransitionRules(transition);
             root.getChildren().add(transition.getTransitionView());
         }
         MouseEventHandler.setTransitions(transitions);
 
         // add entities
         for (Entity entity : entities) {
-            RuleChecker.checkEntityRules(entity);
+            if(CHECK_SSA_RULES) RuleChecker.checkEntityRules(entity);
             entity.getEntityGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
             entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onMouseEntityDraggedEventHandler);
             root.getChildren().add(entity.getEntityGroup());
         }
 
         Scene scene = new Scene(createScrollPane(root), 600, 600);
-        if (wantExportButtons) {
+        if (SHOW_EXPORT_BUTTONS) {
             root.getChildren().add(createPngButton(scene));
             root.getChildren().add(createPdfButton(scene));
             root.getChildren().add(createXmlButton(entities, transitions));
@@ -103,6 +106,7 @@ public class DiagramFactory {
         return buttonPdf;
     }
 
+    // export as some kind of xml, currently works for ssa
     private static Button createXmlButton(Collection<Entity> entities, Collection<Transition> transitions) {
         Button buttonXml = new Button("export as xml");
         buttonXml.setTooltip(new Tooltip("Click to save scene as xml file in root of project."));

@@ -7,8 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
+import lib.Rotated;
 import lib.Rounded;
 import lib.transition.Arrow;
 import lib.transition.Transition;
@@ -60,20 +62,31 @@ public class MouseEventHandler {
             
             for (Transition transition : transitions) {
                 if (draggedEntity.equals(transition.getEntityFrom().getEntityGroup())) {
-                    translateX = transition.getEntityFrom() instanceof Rounded ? 0 : 50;
+                    translateX = calculateTranslateX(transition, true);
                     translateY = transition.getEntityFrom() instanceof Rounded ? 0 : 30;
                     for (Node node : transition.getTransitionView().getChildren()) {
                         moveNode(node, newTranslateX + translateX, newTranslateY + translateY, Dragged.ENTITY_FROM);
                     }
                 }
                 if (draggedEntity.equals(transition.getEntityTo().getEntityGroup())) {
-                    translateX = transition.getEntityTo() instanceof Rounded ? 0 : 50;
+                    translateX = calculateTranslateX(transition, false);
                     translateY = transition.getEntityTo() instanceof Rounded ? 0 : 30;
                     for (Node node : transition.getTransitionView().getChildren()) {
                         moveNode(node, newTranslateX + translateX, newTranslateY + translateY, Dragged.ENTITY_TO);
                     }
                 }
             }
+        }
+
+        private int calculateTranslateX(Transition transition, boolean draggedEntityFrom) {
+            if (draggedEntityFrom){
+                if (transition.getEntityFrom() instanceof Rounded) return 0;
+                if (transition.getEntityFrom() instanceof Rotated) return 30;
+            } else {
+                if (transition.getEntityTo() instanceof Rounded) return 0;
+                if (transition.getEntityTo() instanceof Rotated) return 30;
+            }
+            return 50;
         }
     };
 
@@ -115,6 +128,25 @@ public class MouseEventHandler {
             ceY = curve.getEndY();
             ccX = curve.getControlX();
             ccY = curve.getControlY();
+        }
+        if (node instanceof Line) {
+            Line line = (Line) node;
+            switch (dragged) {
+                case ENTITY_FROM:
+                    line.setStartX(newTranslateX);
+                    line.setStartY(newTranslateY);
+                    break;
+                case ENTITY_TO:
+                    line.setEndX(newTranslateX);
+                    line.setEndY(newTranslateY);
+                    break;
+            }
+            csX = line.getStartX();
+            csY = line.getStartY();
+            ccX = (line.getStartX() + line.getEndX()) / 2;
+            ccY = (line.getStartY() + line.getEndY()) / 2;
+            ceX = line.getEndX();
+            ceY = line.getEndY();
         }
         if (node instanceof Text) {
             Text lineText = (Text) node;

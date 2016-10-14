@@ -84,7 +84,9 @@ public class ExampleSSA extends Application {
         transitions.add(new FullLineTransition(interface7, process4, "tr19"));
         
         // create stage priview
-        DiagramFactory.createStage(primaryStage, entities, transitions, true);
+        DiagramFactory.CHECK_SSA_RULES = true;
+        DiagramFactory.SHOW_EXPORT_BUTTONS = true;
+        DiagramFactory.createStage(primaryStage, entities, transitions);
         primaryStage.setTitle("Example for ssa");
         primaryStage.show();
     }
