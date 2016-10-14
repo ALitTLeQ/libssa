@@ -1,4 +1,4 @@
-package exception;
+package util;
 
 import lib.Entity;
 import lib.transition.Transition;

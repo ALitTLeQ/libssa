@@ -3,7 +3,6 @@ package factory;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
-import exception.RuleChecker;
 import handler.MouseEventHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,6 +23,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import lib.Entity;
 import lib.transition.Transition;
+import util.RuleChecker;
 
 /**
  * @author laki
