@@ -32,7 +32,6 @@ public class DiagramFactory {
 
     public static boolean SHOW_EXPORT_BUTTONS = false;
     public static boolean CHECK_SSA_RULES = false;
-    public static boolean SET_DEFAULT_MOUSE_EVENT_HANDLER = true;
     
     public static void createStage(Stage primaryStage, Collection<Entity> entities, Collection<Transition> transitions) {
         Group root = new Group();
@@ -42,13 +41,13 @@ public class DiagramFactory {
             if(CHECK_SSA_RULES) RuleChecker.checkTransitionRules(transition);
             root.getChildren().add(transition.getTransitionView());
         }
-        if(SET_DEFAULT_MOUSE_EVENT_HANDLER) MouseEventHandler.setTransitions(transitions);
+        MouseEventHandler.setTransitions(transitions);
 
         // add entities
         for (Entity entity : entities) {
             if(CHECK_SSA_RULES) RuleChecker.checkEntityRules(entity);
-            if(SET_DEFAULT_MOUSE_EVENT_HANDLER) entity.getEntityGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
-            if(SET_DEFAULT_MOUSE_EVENT_HANDLER) entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onMouseEntityDraggedEventHandler);
+            entity.getEntityGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
+            entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onMouseEntityDraggedEventHandler);
             root.getChildren().add(entity.getEntityGroup());
         }
 

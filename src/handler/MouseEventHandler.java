@@ -64,14 +64,14 @@ public class MouseEventHandler {
             for (Transition transition : transitions) {
                 if (draggedEntity.equals(transition.getEntityFrom().getEntityGroup())) {
                     translateX = calculateTranslateX(transition, true);
-                    translateY = transition.getEntityFrom() instanceof Rounded ? 0 : 30;
+                    translateY = calculateTranslateY(transition, true);
                     for (Node node : transition.getTransitionView().getChildren()) {
                         moveNode(node, newTranslateX + translateX, newTranslateY + translateY, Dragged.ENTITY_FROM);
                     }
                 }
                 if (draggedEntity.equals(transition.getEntityTo().getEntityGroup())) {
                     translateX = calculateTranslateX(transition, false);
-                    translateY = transition.getEntityTo() instanceof Rounded ? 0 : 30;
+                    translateY = calculateTranslateY(transition, false); 
                     for (Node node : transition.getTransitionView().getChildren()) {
                         moveNode(node, newTranslateX + translateX, newTranslateY + translateY, Dragged.ENTITY_TO);
                     }
@@ -83,11 +83,24 @@ public class MouseEventHandler {
             if (draggedEntityFrom){
                 if (transition.getEntityFrom() instanceof Rounded) return 0;
                 if (transition.getEntityFrom() instanceof Rotated) return 30;
+                return (int) transition.getEntityFrom().getEntityGroup().getLayoutBounds().getWidth() / 2;
             } else {
                 if (transition.getEntityTo() instanceof Rounded) return 0;
                 if (transition.getEntityTo() instanceof Rotated) return 30;
+                return (int) transition.getEntityTo().getEntityGroup().getLayoutBounds().getWidth() / 2;
             }
-            return 50;
+        }
+
+        private int calculateTranslateY(Transition transition, boolean draggedEntityFrom) {
+            if (draggedEntityFrom){
+                if (transition.getEntityFrom() instanceof Rounded) return 0;
+                if (transition.getEntityFrom() instanceof Rotated) return 30;
+                return (int) transition.getEntityFrom().getEntityGroup().getLayoutBounds().getHeight() / 2;
+            } else {
+                if (transition.getEntityTo() instanceof Rounded) return 0;
+                if (transition.getEntityTo() instanceof Rotated) return 30;
+                return (int) transition.getEntityTo().getEntityGroup().getLayoutBounds().getHeight() / 2;
+            }
         }
     };
 
