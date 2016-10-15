@@ -1,7 +1,7 @@
 package util;
 
-import lib.Entity;
-import lib.transition.Transition;
+import lib.shared.Entity;
+import lib.shared.transition.Transition;
 import lib.ssa.DataWarehouse;
 import lib.ssa.Interface;
 import lib.ssa.Process;

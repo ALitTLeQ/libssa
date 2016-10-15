@@ -1,8 +1,8 @@
 package lib.eer;
 
 import factory.EerFactory;
-import lib.Entity;
-import lib.Rounded;
+import lib.shared.Entity;
+import lib.shared.Rounded;
 
 /**
  * @author laki

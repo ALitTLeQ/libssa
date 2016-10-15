@@ -10,10 +10,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
-import lib.Rotated;
-import lib.Rounded;
-import lib.transition.Arrow;
-import lib.transition.Transition;
+import lib.shared.Rotated;
+import lib.shared.Rounded;
+import lib.shared.transition.Arrow;
+import lib.shared.transition.Transition;
 
 /**
  * class handles entity and transition dragging

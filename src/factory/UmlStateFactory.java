@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
  *
  * @author laki
  */
-public class StateFactory {
+public class UmlStateFactory {
 
     private static int stateCount = 0;
 

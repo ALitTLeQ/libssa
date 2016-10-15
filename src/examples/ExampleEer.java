@@ -1,7 +1,9 @@
+package examples;
+
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import lib.Entity;
+import lib.shared.Entity;
 import util.EerModelCreator;
 
 /**

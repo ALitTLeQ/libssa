@@ -4,15 +4,16 @@ import factory.DiagramFactory;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.stage.Stage;
-import lib.Entity;
+import lib.shared.Entity;
 import lib.eer.Aggregation;
 import lib.eer.Attribute;
+import lib.eer.Class;
 import lib.eer.Relation;
 import lib.eer.Specialisation;
 import lib.eer.SubClass;
-import lib.transition.StraightLine;
-import lib.transition.StraightLineTransition;
-import lib.transition.Transition;
+import lib.shared.transition.StraightLine;
+import lib.shared.transition.StraightLineTransition;
+import lib.shared.transition.Transition;
 
 /**
  * @author laki
@@ -38,7 +39,7 @@ public class EerModelCreator {
     }
 
     public Entity createClass(String name) {
-        Entity clazz = new lib.eer.Class(name);
+        Entity clazz = new Class(name);
         entities.add(clazz);
         return clazz;
     }

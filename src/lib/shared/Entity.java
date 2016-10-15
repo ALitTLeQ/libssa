@@ -1,6 +1,6 @@
-package lib;
+package lib.shared;
 
-import lib.transition.Transition;
+import lib.shared.transition.Transition;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.scene.Group;

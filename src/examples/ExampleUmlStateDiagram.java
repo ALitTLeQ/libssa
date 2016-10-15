@@ -1,19 +1,21 @@
+package examples;
+
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import factory.DiagramFactory;
-import lib.Entity;
-import lib.transition.Transition;
-import lib.transition.FullLineTransition;
-import lib.uml.State;
+import lib.shared.Entity;
+import lib.shared.transition.Transition;
+import lib.shared.transition.FullLineTransition;
+import lib.uml.state_diagram.State;
 
 /**
  * example - how to use
  *
  * @author laki
  */
-public class Example extends Application {
+public class ExampleUmlStateDiagram extends Application {
 
     public static void main(String[] args) {
         launch(args);

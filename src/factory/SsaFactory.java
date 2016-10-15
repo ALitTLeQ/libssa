@@ -7,7 +7,7 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import lib.Rounded;
+import lib.shared.Rounded;
 
 /**
  * creates ssa entities (interface, process and data warehouse), calculates

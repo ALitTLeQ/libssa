@@ -1,14 +1,16 @@
+package examples;
+
 import factory.DiagramFactory;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import lib.Entity;
+import lib.shared.Entity;
 import lib.ssa.DataWarehouse;
 import lib.ssa.Interface;
 import lib.ssa.Process;
-import lib.transition.Transition;
-import lib.transition.FullLineTransition;
+import lib.shared.transition.Transition;
+import lib.shared.transition.FullLineTransition;
 
 /**
  * example - how to use for ssa

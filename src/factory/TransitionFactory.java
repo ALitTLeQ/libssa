@@ -9,10 +9,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
-import lib.transition.Arrow;
-import lib.Entity;
-import lib.Rotated;
-import lib.Rounded;
+import lib.shared.transition.Arrow;
+import lib.shared.Entity;
+import lib.shared.Rotated;
+import lib.shared.Rounded;
 
 /**
  * creates transition with line, text and arrow
@@ -86,6 +86,10 @@ public class TransitionFactory {
         return new Group(nodes);
     }
 
+    /**
+     * because rectangle height is hardcoded to 100
+     * @todo change hardcoded value
+     */
     private static int calcTranslateX(Entity e) {
         return e instanceof Rounded ? 0 : (e instanceof Rotated ? 30 : 50);
     }

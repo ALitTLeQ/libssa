@@ -1,7 +1,7 @@
-package lib.transition;
+package lib.shared.transition;
 
 import factory.TransitionFactory;
-import lib.Entity;
+import lib.shared.Entity;
 
 /**
  * @author laki

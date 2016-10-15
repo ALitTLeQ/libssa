@@ -1,8 +1,8 @@
-package lib.uml;
+package lib.uml.state_diagram;
 
-import factory.StateFactory;
-import lib.Entity;
-import lib.Rounded;
+import factory.UmlStateFactory;
+import lib.shared.Entity;
+import lib.shared.Rounded;
 
 /**
  * @author laki
@@ -20,13 +20,13 @@ public class State extends Entity implements Rounded {
         this.type = type;
         switch (type) {
             case INITIAL:
-                entityGroup = StateFactory.createInitialState();
+                entityGroup = UmlStateFactory.createInitialState();
                 break;
             case FINAL:
-                entityGroup = StateFactory.createFinalState();
+                entityGroup = UmlStateFactory.createFinalState();
                 break;
             case TRANSITIONAL:
-                entityGroup = StateFactory.createTransitionalState(name);
+                entityGroup = UmlStateFactory.createTransitionalState(name);
         }
     }
 

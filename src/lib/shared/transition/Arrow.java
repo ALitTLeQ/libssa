@@ -1,4 +1,4 @@
-package lib.transition;
+package lib.shared.transition;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;

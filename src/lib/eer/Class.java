@@ -1,7 +1,7 @@
 package lib.eer;
 
 import factory.EerFactory;
-import lib.Entity;
+import lib.shared.Entity;
 
 /**
  * @author laki

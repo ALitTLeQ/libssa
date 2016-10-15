@@ -1,4 +1,4 @@
-package lib;
+package lib.shared;
 
 /**
  * means that entity group has radius

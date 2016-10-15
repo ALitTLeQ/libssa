@@ -1,7 +1,7 @@
 package lib.ssa;
 
 import factory.SsaFactory;
-import lib.Entity;
+import lib.shared.Entity;
 
 /**
  * @author laki

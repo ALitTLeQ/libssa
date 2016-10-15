@@ -1,7 +1,7 @@
-package lib.transition;
+package lib.shared.transition;
 
 import javafx.scene.Group;
-import lib.Entity;
+import lib.shared.Entity;
 
 /**
  * @author laki

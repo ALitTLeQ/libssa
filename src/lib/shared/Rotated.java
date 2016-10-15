@@ -1,4 +1,4 @@
-package lib;
+package lib.shared;
 
 /**
  * @author laki
