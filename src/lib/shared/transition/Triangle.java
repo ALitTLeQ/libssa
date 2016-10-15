@@ -1,35 +1,31 @@
 package lib.shared.transition;
 
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.transform.Rotate;
 
 /**
  * @author laki
  */
-public class Triangle  extends Polygon {
-
-    private final Rotate rotate;
+public class Triangle extends Group {
 
     public Triangle(Line line) {
-        super(new double[]{0, 0, 10, 20, -10, 20});
-        setFill(Color.BLACK);
+        Polygon outter = new Polygon(new double[]{0, 0, 10, 20, -10, 20});
+        Polygon inner = new Polygon(new double[]{1, 1, 9, 19, -9, 19});
+        outter.setFill(Color.BLACK);
+        inner.setFill(Color.WHITE);
+        getChildren().addAll(outter, inner);
 
-        rotate = new Rotate();
-        rotate.setAxis(Rotate.Z_AXIS);
-
-        getTransforms().add(rotate);
-        setAngle(line.getEndX() - line.getStartX(), line.getEndY() - line.getStartY() );
-
-        setTranslateX(((line.getStartX() + line.getEndX()) / 2));
-        setTranslateY((line.getStartY() + line.getEndY()) / 2);
+        setAngle(line.getStartX(), line.getEndX(), line.getStartY(), line.getEndY());
     }
 
-    public void setAngle(double endX, double endY) {
-        double angle = Math.atan2(endY, endX);
+    public void setAngle(double startX, double endX, double startY, double endY) {
+        double angle = Math.atan2(endY - startY, endX - startX);
         angle = Math.toDegrees(angle);
-        rotate.setAngle(angle + 90);
+        setRotate(angle + 90);
+        setTranslateX((startX + endX) / 2);
+        setTranslateY((startY + endY) / 2 - 10);
     }
 
 }

@@ -51,11 +51,11 @@ public class UmlClassFactory {
     }
 
     private static int calcX() {
-        return ((classCount - 1) % 3 + 1) * 1350;
+        return ((classCount - 1) % 3 + 1) * 550;
     }
 
     private static int calcY() {
-        return ((classCount - 1) / 3 + 1) * 1350;
+        return ((classCount - 1) / 3 + 1) * 550;
     }
 
     private static int calculateMaxWidth(String name, Variable[] vars, Method[] methods) {

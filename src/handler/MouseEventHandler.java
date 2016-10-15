@@ -177,7 +177,7 @@ public class MouseEventHandler {
             Triangle triangle = (Triangle) node;
             triangle.setTranslateX((ccX + (csX + ceX) / 2) / 2);
             triangle.setTranslateY((ccY + (csY + ceY) / 2) / 2);
-            triangle.setAngle(ceX - csX, ceY - csY);
+            triangle.setAngle(csX, ceX, csY, ceY);
         }
     }
     
