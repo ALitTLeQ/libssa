@@ -56,7 +56,6 @@ public class ExampleUmlClassDiagram extends Application {
         connections.add(new Connection(c3, c2, "extends\n0..*", "extends\n0..*", UmlClassFactory.ConnectionType.IMPLEMENTS));
 
         // create stage priview
-        DiagramFactory.SET_DEFAULT_MOUSE_EVENT_HANDLER = false;
         DiagramFactory.createStage(primaryStage, classes, connections);
         primaryStage.setTitle("Example Uml Class Diagram");
         primaryStage.show();

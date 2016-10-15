@@ -14,6 +14,7 @@ import lib.shared.Rotated;
 import lib.shared.Rounded;
 import lib.shared.transition.Arrow;
 import lib.shared.transition.Transition;
+import lib.shared.transition.Triangle;
 
 /**
  * class handles entity and transition dragging
@@ -158,6 +159,12 @@ public class MouseEventHandler {
             arrow.setTranslateX((ccX + (csX + ceX) / 2) / 2);
             arrow.setTranslateY((ccY + (csY + ceY) / 2) / 2);
             arrow.setAngle(ceX - csX, ceY - csY);
+        }
+        if (node instanceof Triangle) {
+            Triangle triangle = (Triangle) node;
+            triangle.setTranslateX((ccX + (csX + ceX) / 2) / 2);
+            triangle.setTranslateY((ccY + (csY + ceY) / 2) / 2);
+            triangle.setAngle(ceX - csX, ceY - csY);
         }
     }
     
