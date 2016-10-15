@@ -119,6 +119,16 @@ public class UmlClassFactory {
         if (connType == ConnectionType.CREATES) line.getStrokeDashArray().addAll(5d);
         nodes.add(line);
         
+        if (connType != ConnectionType.IMPLEMENTS) {
+            Arrow arrow = new Arrow(line);
+            arrow.setCursor(Cursor.MOVE);
+            nodes.add(arrow);
+        } else {
+            Triangle triangle = new Triangle(line);
+            triangle.setCursor(Cursor.MOVE);
+            nodes.add(triangle);
+        }
+        
         if (cardinalityFrom != null && !cardinalityFrom.isEmpty()) {
             Text lineText = new Text(cardinalityFrom);
             lineText.setTranslateX((fromX + ((fromX + toX) / 2)) / 2);
@@ -133,16 +143,6 @@ public class UmlClassFactory {
             lineText.setTranslateY((toY + ((fromY + toY) / 2)) / 2);
             lineText.setCursor(Cursor.MOVE);
             nodes.add(lineText);
-        }
-        
-        if (connType != ConnectionType.IMPLEMENTS) {
-            Arrow arrow = new Arrow(line);
-            arrow.setCursor(Cursor.MOVE);
-            nodes.add(arrow);
-        } else {
-            Triangle triangle = new Triangle(line);
-            triangle.setCursor(Cursor.MOVE);
-            nodes.add(triangle);
         }
 
         return new Group(nodes);
