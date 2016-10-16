@@ -26,6 +26,9 @@ public class Method {
             case Modifier.PRIVATE:
                 sb.append("- ");
                 break;
+            case Modifier.PROTECTED:
+                sb.append("# ");
+                break;
             default:
                 sb.append("+ ");
         }
