@@ -54,10 +54,16 @@ public class UmlClassFactory {
     private static int calculateMaxWidth(String name, Variable[] vars, Method[] methods) {
         int max = name.length();
         for (Variable var : vars) {
-            max = max < var.toString().length() ? var.toString().length() : max;
+            String varString = var.toString();
+            for (String varLine : varString.split("\n")) {
+                max = max < varLine.length() ? varLine.length() : max;
+            }
         }
         for (Method method : methods) {
-            max = max < method.toString().length() ? method.toString().length() : max;
+            String methodString = method.toString();
+            for (String methodLine : methodString.split("\n")) {
+                max = max < methodLine.length() ? methodLine.length() : max;
+            }
         }
         return max;
     }
