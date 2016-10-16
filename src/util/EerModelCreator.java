@@ -64,11 +64,12 @@ public class EerModelCreator {
         transitions.add(new StraightLine(to, rel, toCardinality));
     }
 
-    public void createAggregation(String name, Entity from, Entity to, String fromCardinality, String toCardinality) {
+    public Entity createAggregation(String name, Entity from, Entity to, String fromCardinality, String toCardinality) {
         Entity agr = new Aggregation(name);
         entities.add(agr);
         transitions.add(new StraightLineTransition(from, agr, fromCardinality));
         transitions.add(new StraightLineTransition(to, agr, toCardinality));
+        return agr;
     }
 
     public void createSpecialisation(Entity from, Entity[] to, String cardinality) {
