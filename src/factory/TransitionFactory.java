@@ -13,6 +13,8 @@ import lib.shared.transition.Arrow;
 import lib.shared.Entity;
 import lib.shared.Rotated;
 import lib.shared.Rounded;
+import lib.shared.transition.Transition;
+import lib.shared.transition.Triangle;
 
 /**
  * creates transition with line, text and arrow
@@ -21,33 +23,16 @@ import lib.shared.Rounded;
  */
 public class TransitionFactory {
 
-    public static Group createTransition(Entity fromEntity, Entity toEntity, String text) {
-        return createTransition(fromEntity, toEntity, text, true, QuadCurve.class);
-    }
-
-    public static Group createStraightLine(Entity fromEntity, Entity toEntity, String text) {
-        return createTransition(fromEntity, toEntity, text, false, Line.class);
-    }
-
-    public static Group createStraightLineTransition(Entity fromEntity, Entity toEntity, String text) {
-        return createTransition(fromEntity, toEntity, text, true, Line.class);
-    }
-    
-    public static Group createTransition(Entity fromEntity, Entity toEntity, String text, boolean addArrow, Class c) {
+    public static Group createTransition(Entity fromEntity, Entity toEntity, String text, Transition.Line lineType, Transition.Symbol type) {
         Collection<Node> nodes = new LinkedList<>();
-        int translateFromX = calcTranslateX(fromEntity);
-        int translateFromY = calcTranslateY(fromEntity);
-        int translateToX = calcTranslateX(toEntity);
-        int translateToY = calcTranslateY(toEntity);
-        
         Group from = fromEntity.getEntityGroup();
         Group to = toEntity.getEntityGroup();
 
-        double fromX = from.getTranslateX() + translateFromX;
-        double fromY = from.getTranslateY() + translateFromY;
-        double toX = to.getTranslateX() + translateToX;
-        double toY = to.getTranslateY() + translateToY;
-
+        double fromX = from.getTranslateX() + calcTranslate(fromEntity, true);
+        double fromY = from.getTranslateY() + calcTranslate(fromEntity, false);
+        double toX = to.getTranslateX() + calcTranslate(toEntity, true);
+        double toY = to.getTranslateY() + calcTranslate(toEntity, false);
+        
         int transFrom = fromEntity.getTransitionsFrom().size();
         double curveControlX = (fromX + toX) / 2 + (transFrom % 2 == 0 ? transFrom : -transFrom) * 30;
         double curveControlY = (fromY + toY) / 2;
@@ -55,17 +40,19 @@ public class TransitionFactory {
         Line line = null;
         QuadCurve curve = null;
         
-        if (c.equals(Line.class)) {
+        if (lineType == Transition.Line.STRAIGHT || lineType == Transition.Line.STRAIGHT_INTERRUPTED) {
             line = new Line(fromX, fromY, toX, toY);
             line.setStroke(Color.BLACK);
             line.setStrokeWidth(1);
             line.setFill(null);
+            if (lineType == Transition.Line.STRAIGHT_INTERRUPTED) line.getStrokeDashArray().addAll(5d);
             nodes.add(line);
-        } else if (c.equals(QuadCurve.class)) {
+        } else {
             curve = new QuadCurve(fromX, fromY, curveControlX, curveControlY, toX, toY);
             curve.setStroke(Color.BLACK);
             curve.setStrokeWidth(1);
             curve.setFill(null);
+            if (lineType == Transition.Line.CURVED_INTERRUPTED) curve.getStrokeDashArray().addAll(5d);
             nodes.add(curve);
         }
         
@@ -77,25 +64,31 @@ public class TransitionFactory {
             nodes.add(lineText);
         }
         
-        if (addArrow) {
+        if (type == Transition.Symbol.ARROW) {
             Arrow arrow = line != null ? new Arrow(line) : new Arrow(curve);
             arrow.setCursor(Cursor.MOVE);
             nodes.add(arrow);
+        } else if (type == Transition.Symbol.TRIANGLE) {
+            Triangle triangle = new Triangle(line);
+            triangle.setCursor(Cursor.MOVE);
+            nodes.add(triangle);
         }
 
         return new Group(nodes);
     }
 
     /**
-     * because rectangle height is hardcoded to 100
-     * @todo change hardcoded value
+     * because rectangle width is hardcoded to 100 and rotated to 60 and height
+     * is hardcoded to 60
      */
-    private static int calcTranslateX(Entity e) {
-        return e instanceof Rounded ? 0 : (e instanceof Rotated ? 30 : 50);
-    }
-
-    private static int calcTranslateY(Entity e) {
-        return e instanceof Rounded ? 0 : 30;
+    private static double calcTranslate(Entity e, boolean width) {
+        if (e instanceof Rounded) return 0;
+        if (e instanceof Rotated) return 30;
+        if (width) {
+            return e.getEntityGroup().getLayoutBounds().getWidth() / 2;
+        } else {
+            return e.getEntityGroup().getLayoutBounds().getHeight()/ 2;
+        }
     }
     
 }

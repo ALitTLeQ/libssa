@@ -1,18 +1,11 @@
 package factory;
 
-import java.util.Collection;
-import java.util.LinkedList;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import lib.shared.Entity;
-import lib.shared.transition.Arrow;
-import lib.shared.transition.Triangle;
 import lib.uml.class_diagram.Method;
 import lib.uml.class_diagram.Variable;
 
@@ -97,55 +90,6 @@ public class UmlClassFactory {
         Text t = new Text(sb.toString());
         t.setFont(Font.font("Monospaced"));
         return t;
-    }
-    
-    public static enum ConnectionType { IMPLEMENTS, CREATES, REFERENCES, DOUBLE_REFERENCES }
-    
-    public static Group createConnection(Entity fromEntity, Entity toEntity, String cardinalityFrom, String cardinalityTo, ConnectionType connType) {
-        Collection<Node> nodes = new LinkedList<>();
-        
-        Group from = fromEntity.getEntityGroup();
-        Group to = toEntity.getEntityGroup();
-
-        double fromX = from.getTranslateX() + from.getLayoutBounds().getWidth() / 2;
-        double fromY = from.getTranslateY() + from.getLayoutBounds().getHeight() / 2;
-        double toX = to.getTranslateX() + to.getLayoutBounds().getWidth() / 2;
-        double toY = to.getTranslateY() + to.getLayoutBounds().getHeight() / 2;
-
-        Line line = new Line(fromX, fromY, toX, toY);
-        line.setStroke(Color.BLACK);
-        line.setStrokeWidth(1);
-        line.setFill(null);
-        if (connType == ConnectionType.CREATES) line.getStrokeDashArray().addAll(5d);
-        nodes.add(line);
-        
-        if (connType != ConnectionType.IMPLEMENTS) {
-            Arrow arrow = new Arrow(line);
-            arrow.setCursor(Cursor.MOVE);
-            nodes.add(arrow);
-        } else {
-            Triangle triangle = new Triangle(line);
-            triangle.setCursor(Cursor.MOVE);
-            nodes.add(triangle);
-        }
-        
-        if (cardinalityFrom != null && !cardinalityFrom.isEmpty()) {
-            Text lineText = new Text(cardinalityFrom);
-            lineText.setTranslateX((fromX + ((fromX + toX) / 2)) / 2);
-            lineText.setTranslateY((fromY + ((fromY + toY) / 2)) / 2);
-            lineText.setCursor(Cursor.MOVE);
-            nodes.add(lineText);
-        }
-        
-        if (cardinalityTo != null && !cardinalityTo.isEmpty()) {
-            Text lineText = new Text(cardinalityTo);
-            lineText.setTranslateX((toX + ((fromX + toX) / 2)) / 2);
-            lineText.setTranslateY((toY + ((fromY + toY) / 2)) / 2);
-            lineText.setCursor(Cursor.MOVE);
-            nodes.add(lineText);
-        }
-
-        return new Group(nodes);
     }
 
 }

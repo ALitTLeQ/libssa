@@ -1,16 +1,17 @@
 package examples;
 
 import factory.DiagramFactory;
-import factory.UmlClassFactory;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import lib.shared.Entity;
+import lib.shared.transition.CreatesTransition;
+import lib.shared.transition.ImplementsTransition;
+import lib.shared.transition.StraightLineTransition;
 import lib.shared.transition.Transition;
 import lib.uml.class_diagram.Class;
-import lib.uml.class_diagram.Connection;
 import lib.uml.class_diagram.Method;
 import lib.uml.class_diagram.Variable;
 
@@ -27,7 +28,7 @@ public class ExampleUmlClassDiagram extends Application {
     public void start(Stage primaryStage) {
         // create collections
         Collection<Entity> classes = new HashSet<>();
-        Collection<Transition> connections = new HashSet<>();
+        Collection<Transition> transitions = new HashSet<>();
 
         Class c1 = new Class("c1", Modifier.ABSTRACT,
                 new Variable[]{
@@ -51,12 +52,12 @@ public class ExampleUmlClassDiagram extends Application {
                 new Method[]{new Method(Modifier.PUBLIC, "void", "method1", null)});
         classes.add(c3);
         
-        connections.add(new Connection(c1, c2, "asdasd", "to2", UmlClassFactory.ConnectionType.REFERENCES));
-        connections.add(new Connection(c1, c3, "from1", "to3", UmlClassFactory.ConnectionType.CREATES));
-        connections.add(new Connection(c3, c2, "extends\n0..*", "extends\n0..*", UmlClassFactory.ConnectionType.IMPLEMENTS));
+        transitions.add(new StraightLineTransition(c1, c2, "asdasd"));
+        transitions.add(new CreatesTransition(c1, c3, "from1"));
+        transitions.add(new ImplementsTransition(c3, c2, "extends\n0..*"));
 
         // create stage priview
-        DiagramFactory.createStage(primaryStage, classes, connections);
+        DiagramFactory.createStage(primaryStage, classes, transitions);
         primaryStage.setTitle("Example Uml Class Diagram");
         primaryStage.show();
     }

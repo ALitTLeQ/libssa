@@ -10,7 +10,7 @@ public class StraightLineTransition extends Transition {
 
     public StraightLineTransition(Entity entityFrom, Entity entityTo, String name) {
         super(entityFrom, entityTo, name);
-        transitionView = TransitionFactory.createStraightLineTransition(entityFrom, entityTo, name);
+        transitionView = TransitionFactory.createTransition(entityFrom, entityTo, name, Line.STRAIGHT, Symbol.ARROW);
     }
     
 }

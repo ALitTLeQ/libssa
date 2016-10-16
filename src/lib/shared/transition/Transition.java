@@ -7,6 +7,9 @@ import lib.shared.Entity;
  * @author laki
  */
 public abstract class Transition {
+    
+    public static enum Symbol { ARROW, TRIANGLE, NONE }
+    public static enum Line { CURVED, STRAIGHT, CURVED_INTERRUPTED, STRAIGHT_INTERRUPTED }
 
     protected Group transitionView;
     private final String name;
