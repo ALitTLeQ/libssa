@@ -47,7 +47,7 @@ public class DiagramFactory {
         for (Entity entity : entities) {
             if(CHECK_SSA_RULES) RuleChecker.checkEntityRules(entity);
             entity.getEntityGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
-            entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onMouseEntityDraggedEventHandler);
+            entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onEntityDraggedEventHandler);
             root.getChildren().add(entity.getEntityGroup());
         }
 

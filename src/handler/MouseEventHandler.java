@@ -31,7 +31,7 @@ public class MouseEventHandler {
 
     public static void setTransitions(Collection<Transition> transitions) {
         for (Transition transition : transitions) {
-            transition.getTransitionView().setOnMouseDragged(onMouseTransitionDraggedEventHandler);
+            transition.getTransitionView().setOnMouseDragged(onTransitionDraggedEventHandler);
         }
         MouseEventHandler.transitions = transitions;
     }
@@ -46,7 +46,7 @@ public class MouseEventHandler {
         }
     };
 
-    public static EventHandler<MouseEvent> onMouseEntityDraggedEventHandler = new EventHandler<MouseEvent>() {
+    public static EventHandler<MouseEvent> onEntityDraggedEventHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent t) {
             double offsetX = t.getSceneX() - orgSceneX;
@@ -104,7 +104,7 @@ public class MouseEventHandler {
         }
     };
 
-    public static EventHandler<MouseEvent> onMouseTransitionDraggedEventHandler = new EventHandler<MouseEvent>() {
+    public static EventHandler<MouseEvent> onTransitionDraggedEventHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent t) {
             double offsetX = t.getSceneX() - orgSceneX;
