@@ -24,6 +24,9 @@ public class Variable {
             case Modifier.PRIVATE:
                 sb.append("- ");
                 break;
+            case Modifier.PROTECTED:
+                sb.append("# ");
+                break;
             default:
                 sb.append("+ ");
         }
