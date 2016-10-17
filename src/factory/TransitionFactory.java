@@ -9,12 +9,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
-import lib.shared.transition.Arrow;
 import lib.shared.Entity;
 import lib.shared.Rotated;
 import lib.shared.Rounded;
 import lib.shared.transition.Transition;
-import lib.shared.transition.Triangle;
+import lib.shared.transition.symbol.Arrow;
+import lib.shared.transition.symbol.Triangle;
 
 /**
  * creates transition with line, text and arrow

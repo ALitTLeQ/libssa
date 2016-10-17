@@ -12,9 +12,9 @@ import javafx.scene.shape.QuadCurve;
 import javafx.scene.text.Text;
 import lib.shared.Rotated;
 import lib.shared.Rounded;
-import lib.shared.transition.Arrow;
+import lib.shared.transition.symbol.Arrow;
 import lib.shared.transition.Transition;
-import lib.shared.transition.Triangle;
+import lib.shared.transition.symbol.Triangle;
 
 /**
  * class handles entity and transition dragging
@@ -171,7 +171,7 @@ public class MouseEventHandler {
             Arrow arrow = (Arrow) node;
             arrow.setTranslateX((ccX + (csX + ceX) / 2) / 2);
             arrow.setTranslateY((ccY + (csY + ceY) / 2) / 2);
-            arrow.setAngle(ceX - csX, ceY - csY);
+            arrow.setAngle(csX, ceX, csY, ceY);
         }
         if (node instanceof Triangle) {
             Triangle triangle = (Triangle) node;
