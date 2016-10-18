@@ -28,14 +28,11 @@ public class TransitionFactory {
         Group from = fromEntity.getEntityGroup();
         Group to = toEntity.getEntityGroup();
 
+        // calculates entity`s central coordinates
         double fromX = from.getTranslateX() + calcTranslate(fromEntity, true);
         double fromY = from.getTranslateY() + calcTranslate(fromEntity, false);
         double toX = to.getTranslateX() + calcTranslate(toEntity, true);
         double toY = to.getTranslateY() + calcTranslate(toEntity, false);
-        
-        int transFrom = fromEntity.getTransitionsFrom().size();
-        double curveControlX = (fromX + toX) / 2 + (transFrom % 2 == 0 ? transFrom : -transFrom) * 30;
-        double curveControlY = (fromY + toY) / 2;
 
         Line line = null;
         QuadCurve curve = null;
@@ -48,6 +45,9 @@ public class TransitionFactory {
             if (lineType == Transition.Line.STRAIGHT_INTERRUPTED) line.getStrokeDashArray().addAll(5d);
             nodes.add(line);
         } else {
+            int transFrom = fromEntity.getTransitionsFrom().size();
+            double curveControlX = (fromX + toX) / 2 + (transFrom % 2 == 0 ? transFrom : -transFrom) * 30;
+            double curveControlY = (fromY + toY) / 2;
             curve = new QuadCurve(fromX, fromY, curveControlX, curveControlY, toX, toY);
             curve.setStroke(Color.BLACK);
             curve.setStrokeWidth(1);
@@ -90,5 +90,5 @@ public class TransitionFactory {
             return e.getEntityGroup().getLayoutBounds().getHeight()/ 2;
         }
     }
-    
+
 }
