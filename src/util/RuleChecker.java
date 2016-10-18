@@ -42,16 +42,16 @@ public class RuleChecker {
     public static void checkEntityRules(Entity e) {
         String name = e.getName();
         if (name == null || name.isEmpty()) {
-            throw new IllegalTransitionException(ILLEGAL_ENTITY_NAME);
+            throw new IllegalEntityException(ILLEGAL_ENTITY_NAME);
         }
         if (e instanceof Process && (e.getTransitionsFrom().isEmpty() || e.getTransitionsTo().isEmpty())) {
-            throw new IllegalTransitionException(ILLEGAL_PROCESS);
+            throw new IllegalEntityException(ILLEGAL_PROCESS);
         }
         if (e instanceof DataWarehouse && (e.getTransitionsFrom().isEmpty() && e.getTransitionsTo().isEmpty())) {
-            throw new IllegalTransitionException(ILLEGAL_WAREHOUSE);
+            throw new IllegalEntityException(ILLEGAL_WAREHOUSE);
         }
         if (e instanceof Interface && (e.getTransitionsFrom().isEmpty() && e.getTransitionsTo().isEmpty())) {
-            throw new IllegalTransitionException(ILLEGAL_INTERFACE);
+            throw new IllegalEntityException(ILLEGAL_INTERFACE);
         }
     }
 
