@@ -20,29 +20,33 @@ public class ExampleEer extends Application {
     @Override
     public void start(Stage primaryStage) {
         EerModelCreator emc = EerModelCreator.instance();
-                
-        Entity c1 = emc.createClass("first class");
-        emc.createAttribute("atr11", c1);
-        emc.createAttribute("atr12", c1);
-        emc.createAttribute("atr13", c1);
+
+        Entity student = emc.createClass("student");
+        emc.createAttribute("broj indeksa", student);
+        emc.createAttribute("ime i prezime", student);
+        emc.createAttribute("semestar", student);
+        emc.createAttribute("status", student);
         
-        Entity c2 = emc.createClass("second class");
-        emc.createAttribute("atr21", c2);
+        Entity sluzba = emc.createClass("studentska služba");
+        Entity katedra = emc.createClass("katedra");
+        Entity ispit = emc.createClass("ispit");
+        emc.createAttribute("id", ispit);
+        emc.createAttribute("espb", ispit);
+        emc.createAttribute("naziv", ispit);
         
-        Entity c3 = emc.createClass("third class");
-        emc.createAttribute("atr31", c3);
-        emc.createAttribute("atr32", c3);
+        Entity prijava = emc.createAggregation("prijava", student, ispit, "(0,M) šalje", "(0,M) ima");
+        emc.createAttribute("status", prijava);
+        emc.createAttribute("datum", prijava);
+        emc.createAttribute("id", prijava);
         
-        Entity sc1 = emc.createSubClass("sub class", c1, "(0:M)");
-        emc.createAttribute("atr sc11", sc1);
-        emc.createAttribute("atr sc12", sc1);
+        emc.createRelation("obrađuje", prijava, sluzba, "(1:1)", "(0:M)");
+        emc.createRelation("pripada", ispit, katedra, "(1:1)", "(1:M)");
         
-        Entity sc2 = emc.createSubClass("sub class 2", c2, "(0:1)");
-        emc.createAttribute("atr sc21", sc2);
-        
-        emc.createRelation("relation name", c1, sc2, "(0:1)", "(1:1)");
-        emc.createAggregation("aggregation name", c1, c2, "(0:M)", "(1:M)");
-        emc.createSpecialisation(c1, new Entity[]{c2, c3}, "(0:M)");
+        emc.createSpecialisation(katedra, new Entity[]{
+            emc.createClass("katedra za softversko inženjerstvo"),
+            emc.createClass("katedra za inform. sisteme"),
+            emc.createClass("katedra za elektronsko poslovanje"),
+        }, "(1:1)");
         
         emc.createModel(primaryStage);
     }

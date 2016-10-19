@@ -30,29 +30,29 @@ import util.RuleChecker;
  */
 public class DiagramFactory {
 
-    public static boolean SHOW_EXPORT_BUTTONS = false;
-    public static boolean CHECK_SSA_RULES = false;
+    public static boolean addExportButtons = false;
+    public static RuleChecker checker = null;
     
     public static void createStage(Stage primaryStage, Collection<Entity> entities, Collection<Transition> transitions) {
         Group root = new Group();
 
         // add transitions
         for (Transition transition : transitions) {
-            if(CHECK_SSA_RULES) RuleChecker.checkTransitionRules(transition);
+            if(checker != null) checker.checkTransitionRules(transition);
             root.getChildren().add(transition.getTransitionView());
         }
         MouseEventHandler.setTransitions(transitions);
 
         // add entities
         for (Entity entity : entities) {
-            if(CHECK_SSA_RULES) RuleChecker.checkEntityRules(entity);
+            if(checker != null) checker.checkEntityRules(entity);
             entity.getEntityGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
             entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onEntityDraggedEventHandler);
             root.getChildren().add(entity.getEntityGroup());
         }
 
         Scene scene = new Scene(createScrollPane(root), 600, 600);
-        if (SHOW_EXPORT_BUTTONS) {
+        if (addExportButtons) {
             root.getChildren().add(createPngButton(scene));
             root.getChildren().add(createPdfButton(scene));
             root.getChildren().add(createXmlButton(entities, transitions));
