@@ -35,6 +35,8 @@ public class DefaultTransitionFactory implements TransitionFactory {
 
         Line line = null;
         QuadCurve curve = null;
+        Double curveControlX = null;
+        Double curveControlY = null;
         
         if (lineType == Transition.Line.STRAIGHT || lineType == Transition.Line.STRAIGHT_INTERRUPTED) {
             line = new Line(fromX, fromY, toX, toY);
@@ -45,8 +47,8 @@ public class DefaultTransitionFactory implements TransitionFactory {
             nodes.add(line);
         } else {
             int transFrom = fromEntity.getTransitionsFrom().size();
-            double curveControlX = (fromX + toX) / 2 + (transFrom % 2 == 0 ? transFrom : -transFrom) * 30;
-            double curveControlY = (fromY + toY) / 2;
+            curveControlX = (fromX + toX) / 2 + (transFrom % 2 == 0 ? transFrom : -transFrom) * 30;
+            curveControlY = (fromY + toY) / 2;
             curve = new QuadCurve(fromX, fromY, curveControlX, curveControlY, toX, toY);
             curve.setStroke(Color.BLACK);
             curve.setStrokeWidth(1);
@@ -57,6 +59,7 @@ public class DefaultTransitionFactory implements TransitionFactory {
         
         if (text != null && !text.isEmpty()) {
             Text lineText = new Text(text);
+            // need to fix this, accidentaly commited
             lineText.setTranslateX(calcTextX(fromX, toX, to));
             lineText.setTranslateY(calcTextY(fromY, toY, to));
             lineText.setCursor(Cursor.MOVE);
@@ -64,11 +67,11 @@ public class DefaultTransitionFactory implements TransitionFactory {
         }
         
         if (type == Transition.Symbol.ARROW) {
-            Arrow arrow = line != null ? new Arrow(line) : new Arrow(curve);
+            Arrow arrow = new Arrow(fromX, curveControlX, toX, fromY, curveControlY, toY);
             arrow.setCursor(Cursor.MOVE);
             nodes.add(arrow);
         } else if (type == Transition.Symbol.TRIANGLE) {
-            Triangle triangle = new Triangle(line);
+            Triangle triangle = new Triangle(fromX, curveControlX, toX, fromY, curveControlY, toY);
             triangle.setCursor(Cursor.MOVE);
             nodes.add(triangle);
         }

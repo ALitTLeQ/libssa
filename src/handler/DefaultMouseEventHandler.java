@@ -205,9 +205,7 @@ public class DefaultMouseEventHandler implements MouseEventHandler {
         }
         if (node instanceof Symbol) {
             Symbol symbol = (Symbol) node;
-            symbol.setTranslateX((ccX + (csX + ceX) / 2) / 2);
-            symbol.setTranslateY((ccY + (csY + ceY) / 2) / 2);
-            symbol.setAngle(csX, ceX, csY, ceY);
+            symbol.setAngleAndPosition(csX, ccX, ceX, csY, ccY, ceY);
         }
     }
 
