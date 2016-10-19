@@ -10,7 +10,7 @@ public class FullLineTransition extends Transition {
 
     public FullLineTransition(Entity entityFrom, Entity entityTo, String name) {
         super(entityFrom, entityTo, name);
-        transitionView = TransitionFactory.createTransition(entityFrom, entityTo, name, Line.CURVED, Symbol.ARROW);
+        transitionView = TransitionFactory.factory.createTransition(entityFrom, entityTo, name, Line.CURVED, Symbol.ARROW);
     }
     
 }

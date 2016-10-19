@@ -10,7 +10,7 @@ public class ImplementsTransition extends Transition {
 
     public ImplementsTransition(Entity entityFrom, Entity entityTo, String name) {
         super(entityFrom, entityTo, name);
-        transitionView = TransitionFactory.createTransition(entityFrom, entityTo, name, Line.STRAIGHT, Symbol.TRIANGLE);
+        transitionView = TransitionFactory.factory.createTransition(entityFrom, entityTo, name, Line.STRAIGHT, Symbol.TRIANGLE);
     }
 
 }
