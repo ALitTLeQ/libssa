@@ -3,7 +3,7 @@ package factory;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
-import handler.MouseEventHandler;
+import handler.DefaultMouseEventHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,6 +24,7 @@ import javax.imageio.ImageIO;
 import lib.shared.Entity;
 import lib.shared.transition.Transition;
 import util.RuleChecker;
+import handler.MouseEventHandler;
 
 /**
  * @author laki
@@ -32,6 +33,7 @@ public class DiagramFactory {
 
     public static boolean addExportButtons = false;
     public static RuleChecker checker = null;
+    public static MouseEventHandler handler = DefaultMouseEventHandler.instance();
     
     public static void createStage(Stage primaryStage, Collection<Entity> entities, Collection<Transition> transitions) {
         Group root = new Group();
@@ -41,13 +43,13 @@ public class DiagramFactory {
             if(checker != null) checker.checkTransitionRules(transition);
             root.getChildren().add(transition.getTransitionView());
         }
-        MouseEventHandler.setTransitions(transitions);
+        handler.setTransitions(transitions);
 
         // add entities
         for (Entity entity : entities) {
             if(checker != null) checker.checkEntityRules(entity);
-            entity.getEntityGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
-            entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onEntityDraggedEventHandler);
+            entity.getEntityGroup().setOnMousePressed(handler.getOnMousePressedEventHandler());
+            entity.getEntityGroup().setOnMouseDragged(handler.getOnEntityDraggedEventHandler());
             root.getChildren().add(entity.getEntityGroup());
         }
 
@@ -163,7 +165,7 @@ public class DiagramFactory {
         flowPane.setPadding(new Insets(10, 10, 10, 10));
         flowPane.setHgap(10);
         flowPane.setVgap(10);
-        flowPane.setOnScroll(MouseEventHandler.onMouseScrolledEventHandler);
+        flowPane.setOnScroll(handler.getOnMouseScrolledEventHandler());
 
         flowPane.getChildren().add(root);
 
