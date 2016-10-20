@@ -59,9 +59,13 @@ public class DefaultTransitionFactory implements TransitionFactory {
         
         if (text != null && !text.isEmpty()) {
             Text lineText = new Text(text);
-            // need to fix this, accidentaly commited
-            lineText.setTranslateX(calcTextX(fromX, toX, to));
-            lineText.setTranslateY(calcTextY(fromY, toY, to));
+            if (curveControlX != null && curveControlY != null) {
+                lineText.setTranslateX((curveControlX + ((fromX + toX) / 2)) / 2);
+                lineText.setTranslateY((curveControlY + ((fromY + toY) / 2)) / 2);
+            } else {
+                lineText.setTranslateX((fromX + toX) / 2);
+                lineText.setTranslateY((fromY + toY) / 2);
+            }
             lineText.setCursor(Cursor.MOVE);
             nodes.add(lineText);
         }
@@ -92,6 +96,7 @@ public class DefaultTransitionFactory implements TransitionFactory {
         }
     }
 
+    // @todo - fix
     private static double calcTextX(double fromX, double toX, Group to) {
         if(fromX == toX) return toX + 10;
         if(fromX < toX) {
