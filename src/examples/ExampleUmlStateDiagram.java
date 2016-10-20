@@ -29,34 +29,47 @@ public class ExampleUmlStateDiagram extends Application {
 
         // create states
         Entity initialState = new State(State.StateType.INITIAL, null);
-        Entity transState1 = new State(State.StateType.TRANSITIONAL, "t1");
-        Entity transState2 = new State(State.StateType.TRANSITIONAL, "t2");
-        Entity transState3 = new State(State.StateType.TRANSITIONAL, "t3");
-        Entity transState4 = new State(State.StateType.TRANSITIONAL, "t4");
+        Entity popunjena = new State(State.StateType.TRANSITIONAL, "popunjena");
+        Entity predata = new State(State.StateType.TRANSITIONAL, "predata");
+        Entity dostavljena = new State(State.StateType.TRANSITIONAL, "dostavljena");
+        Entity pregledana = new State(State.StateType.TRANSITIONAL, "pregledana");
+        Entity odobrena = new State(State.StateType.TRANSITIONAL, "odobrena");
+        Entity odbijena = new State(State.StateType.TRANSITIONAL, "odbijena");
+        Entity poslataKatedri = new State(State.StateType.TRANSITIONAL, "poslata katedri");
+        Entity pregledanaNaKatedri = new State(State.StateType.TRANSITIONAL, "pregledana na katedri");
+        Entity rezultovana = new State(State.StateType.TRANSITIONAL, "rezultovana");
         Entity finalState = new State(State.StateType.FINAL, null);
 
         // add them to collection
         states.add(initialState);
         states.add(finalState);
-        states.add(transState1);
-        states.add(transState2);
-        states.add(transState3);
-        states.add(transState4);
+        states.add(popunjena);
+        states.add(predata);
+        states.add(dostavljena);
+        states.add(pregledana);
+        states.add(odobrena);
+        states.add(odbijena);
+        states.add(poslataKatedri);
+        states.add(pregledanaNaKatedri);
+        states.add(rezultovana);
 
         // create transitions and add to collection
-        transitions.add(new FullLineTransition(initialState, transState1, "tr1"));
-        transitions.add(new FullLineTransition(transState1, transState2, "tr21"));
-        transitions.add(new FullLineTransition(transState1, transState2, "tr22"));
-        transitions.add(new FullLineTransition(transState1, transState2, "tr23"));
-        transitions.add(new FullLineTransition(transState2, transState3, "tr23"));
-        transitions.add(new FullLineTransition(transState2, transState3, "tr23"));
-        transitions.add(new FullLineTransition(transState1, transState3, "tr23"));
-        transitions.add(new FullLineTransition(transState3, transState4, "tr23"));
-        transitions.add(new FullLineTransition(transState4, transState2, "tr23"));
-        transitions.add(new FullLineTransition(transState2, finalState, "tr3"));
+        transitions.add(new FullLineTransition(initialState, popunjena, "popunjavanje"));
+        transitions.add(new FullLineTransition(popunjena, predata, "predavanje"));
+        transitions.add(new FullLineTransition(predata, dostavljena, "slanje"));
+        transitions.add(new FullLineTransition(dostavljena, pregledana, "pregledanje"));
+        transitions.add(new FullLineTransition(pregledana, odobrena, "odobravanje"));
+        transitions.add(new FullLineTransition(pregledana, odbijena, "odbijanje"));
+        transitions.add(new FullLineTransition(odbijena, rezultovana, "rezultovanje"));
+        transitions.add(new FullLineTransition(odobrena, poslataKatedri, "slanje katedri"));
+        transitions.add(new FullLineTransition(poslataKatedri, pregledanaNaKatedri, "pregledanje na katedri"));
+        transitions.add(new FullLineTransition(pregledanaNaKatedri, odobrena, "odobravanje"));
+        transitions.add(new FullLineTransition(pregledanaNaKatedri, odbijena, "odbijanje"));
+        transitions.add(new FullLineTransition(odobrena, rezultovana, "rezultovanje"));
+        transitions.add(new FullLineTransition(rezultovana, finalState, "slanje"));
 
         // create stage priview
-        DiagramFactory.SHOW_EXPORT_BUTTONS = true;
+        DiagramFactory.addExportButtons = true;
         DiagramFactory.createStage(primaryStage, states, transitions);
         primaryStage.setTitle("Example");
         primaryStage.show();

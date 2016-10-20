@@ -1,29 +1,22 @@
 package lib.shared.transition.symbol;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.QuadCurve;
 
 /**
  * @author laki
  */
 public class Arrow extends Symbol {
 
-    public Arrow(QuadCurve curve) {
+    public Arrow(double startX, Double controlX, double endX, double startY, Double controlY, double endY) {
         super();
-        createShape(curve.getStartX(), curve.getEndX(), curve.getStartY(), curve.getEndY());
+        createShape(startX, controlX, endX, startY, controlY, endY);
     }
     
-    public Arrow(Line line) {
-        super();
-        createShape(line.getStartX(), line.getEndX(), line.getStartY(), line.getEndY());
-    }
-    
-    public void createShape(double startX, double endX, double startY, double endY) {
+    public void createShape(double startX, Double controlX, double endX, double startY, Double controlY, double endY) {
         Polygon arrow = new Polygon(new double[]{0, 0, 5, 20, -5, 20}); // arrow shape
         arrow.setFill(Color.BLACK);
         getChildren().add(arrow);
-        setAngle(startX, endX, startY, endY);
+        setAngleAndPosition(startX, controlX, endX, startY, controlY, endY);
     }
 }

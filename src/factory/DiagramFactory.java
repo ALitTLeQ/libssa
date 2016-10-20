@@ -3,7 +3,7 @@ package factory;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
-import handler.MouseEventHandler;
+import handler.DefaultMouseEventHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,35 +24,37 @@ import javax.imageio.ImageIO;
 import lib.shared.Entity;
 import lib.shared.transition.Transition;
 import util.RuleChecker;
+import handler.MouseEventHandler;
 
 /**
  * @author laki
  */
 public class DiagramFactory {
 
-    public static boolean SHOW_EXPORT_BUTTONS = false;
-    public static boolean CHECK_SSA_RULES = false;
+    public static boolean addExportButtons = false;
+    public static RuleChecker checker = null;
+    public static MouseEventHandler handler = DefaultMouseEventHandler.instance();
     
     public static void createStage(Stage primaryStage, Collection<Entity> entities, Collection<Transition> transitions) {
         Group root = new Group();
 
         // add transitions
         for (Transition transition : transitions) {
-            if(CHECK_SSA_RULES) RuleChecker.checkTransitionRules(transition);
+            if(checker != null) checker.checkTransitionRules(transition);
             root.getChildren().add(transition.getTransitionView());
         }
-        MouseEventHandler.setTransitions(transitions);
+        handler.setTransitions(transitions);
 
         // add entities
         for (Entity entity : entities) {
-            if(CHECK_SSA_RULES) RuleChecker.checkEntityRules(entity);
-            entity.getEntityGroup().setOnMousePressed(MouseEventHandler.onMousePressedEventHandler);
-            entity.getEntityGroup().setOnMouseDragged(MouseEventHandler.onEntityDraggedEventHandler);
+            if(checker != null) checker.checkEntityRules(entity);
+            entity.getEntityGroup().setOnMousePressed(handler.getOnMousePressedEventHandler());
+            entity.getEntityGroup().setOnMouseDragged(handler.getOnEntityDraggedEventHandler());
             root.getChildren().add(entity.getEntityGroup());
         }
 
         Scene scene = new Scene(createScrollPane(root), 600, 600);
-        if (SHOW_EXPORT_BUTTONS) {
+        if (addExportButtons) {
             root.getChildren().add(createPngButton(scene));
             root.getChildren().add(createPdfButton(scene));
             root.getChildren().add(createXmlButton(entities, transitions));
@@ -163,7 +165,7 @@ public class DiagramFactory {
         flowPane.setPadding(new Insets(10, 10, 10, 10));
         flowPane.setHgap(10);
         flowPane.setVgap(10);
-        flowPane.setOnScroll(MouseEventHandler.onMouseScrolledEventHandler);
+        flowPane.setOnScroll(handler.getOnMouseScrolledEventHandler());
 
         flowPane.getChildren().add(root);
 
