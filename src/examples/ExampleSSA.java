@@ -1,17 +1,17 @@
 package examples;
 
-import factory.DiagramFactory;
+import core.factory.DiagramFactory;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import lib.shared.Entity;
-import lib.ssa.DataWarehouse;
-import lib.ssa.Interface;
-import lib.ssa.Process;
-import lib.shared.transition.Transition;
-import lib.shared.transition.FullLineTransition;
-import util.SSARuleChecker;
+import core.lib.Entity;
+import impl.ssa.DataWarehouse;
+import impl.ssa.Interface;
+import impl.ssa.Process;
+import core.lib.Transition;
+import impl.shared.FullLineTransition;
+import impl.ssa.SSARuleChecker;
 
 /**
  * example - how to use for ssa

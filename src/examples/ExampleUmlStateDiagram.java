@@ -4,11 +4,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import factory.DiagramFactory;
-import lib.shared.Entity;
-import lib.shared.transition.Transition;
-import lib.shared.transition.FullLineTransition;
-import lib.uml.state_diagram.State;
+import core.factory.DiagramFactory;
+import core.lib.Entity;
+import core.lib.Transition;
+import impl.shared.FullLineTransition;
+import impl.uml.state_diagram.State;
 
 /**
  * example - how to use

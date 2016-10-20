@@ -3,8 +3,8 @@ package examples;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import lib.shared.Entity;
-import util.EerModelCreator;
+import core.lib.Entity;
+import impl.eer.EerModelCreator;
 
 /**
  * example - how to use for EER(extended entity relationship model)
