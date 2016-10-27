@@ -33,6 +33,7 @@ public class ExampleEer extends Application {
         emc.createAttribute("id", ispit);
         emc.createAttribute("espb", ispit);
         emc.createAttribute("naziv", ispit);
+        emc.createSubClass("kolokvijum", ispit, "(0,M)");
         
         Entity prijava = emc.createAggregation("prijava", student, ispit, "(0,M) šalje", "(0,M) ima");
         emc.createAttribute("status", prijava);
