@@ -10,7 +10,7 @@ public class Process extends Entity implements Rounded {
 
     public Process(String name) {
         super(name);
-        entityGroup = SsaFactory.createProcess(name);
+        entityGroup = SsaFactory.createEntity(name, Process.class);
     }
 
 }

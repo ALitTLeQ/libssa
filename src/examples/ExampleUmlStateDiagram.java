@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import core.factory.DiagramFactory;
 import core.lib.Entity;
 import core.lib.Transition;
+import core.util.DefaultExportManager;
 import impl.shared.FullLineTransition;
 import impl.uml.state_diagram.State;
 
@@ -69,7 +70,7 @@ public class ExampleUmlStateDiagram extends Application {
         transitions.add(new FullLineTransition(rezultovana, finalState, "slanje"));
 
         // create stage priview
-        DiagramFactory.addExportButtons = true;
+        DiagramFactory.exportManager = new DefaultExportManager(true, true, false);
         DiagramFactory.createStage(primaryStage, states, transitions);
         primaryStage.setTitle("Example");
         primaryStage.show();
