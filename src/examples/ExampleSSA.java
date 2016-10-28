@@ -10,6 +10,7 @@ import impl.ssa.DataWarehouse;
 import impl.ssa.Interface;
 import impl.ssa.Process;
 import core.lib.Transition;
+import core.util.DefaultExportManager;
 import impl.shared.FullLineTransition;
 import impl.ssa.SSARuleChecker;
 
@@ -70,7 +71,7 @@ public class ExampleSSA extends Application {
         
         // create stage priview
         DiagramFactory.checker = new SSARuleChecker();
-        DiagramFactory.addExportButtons = true;
+        DiagramFactory.exportManager = new DefaultExportManager(true, true, true);
         DiagramFactory.createStage(primaryStage, entities, transitions);
         primaryStage.setTitle("Example for ssa");
         primaryStage.show();

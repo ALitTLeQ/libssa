@@ -18,12 +18,19 @@ import core.lib.Rounded;
 public class SsaFactory {
 
     private static int entityCount = 0;
-
-    public static Group createInterface(String text) {
-        return createInterface(text, 0, 0);
+    
+    public static Group createEntity(String text, Class clazz) {
+        return createEntity(text, 0, 0, clazz);
     }
 
-    public static Group createInterface(String name, int x, int y) {
+    public static Group createEntity(String name, int x, int y, Class clazz) {
+        if (clazz.equals(Interface.class)) return createInterface(name, x, y);
+        if (clazz.equals(Process.class)) return createProcess(name, x, y);
+        if (clazz.equals(DataWarehouse.class)) return createDataWarehouse(name, x, y);
+        return null;
+    }
+
+    private static Group createInterface(String name, int x, int y) {
         entityCount++;
         Rectangle rectOutter = new Rectangle(100, 60);
         rectOutter.setFill(Color.BLACK);
@@ -42,11 +49,7 @@ public class SsaFactory {
         return g;
     }
 
-    public static Group createProcess(String text) {
-        return createProcess(text, 0, 0);
-    }
-
-    public static Group createProcess(String text, int x, int y) {
+    private static Group createProcess(String text, int x, int y) {
         entityCount++;
         Ellipse eOutter = new Ellipse(50, 30);
         eOutter.setFill(Color.BLACK);
@@ -67,11 +70,7 @@ public class SsaFactory {
         return g;
     }
 
-    public static Group createDataWarehouse(String name) {
-        return createDataWarehouse(name, 0, 0);
-    }
-
-    public static Group createDataWarehouse(String name, int x, int y) {
+    private static Group createDataWarehouse(String name, int x, int y) {
         entityCount++;
         Rectangle rectOutter = new Rectangle(100, 60);
         rectOutter.setFill(Color.BLACK);

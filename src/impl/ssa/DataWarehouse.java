@@ -9,7 +9,7 @@ public class DataWarehouse extends Entity {
 
     public DataWarehouse(String name) {
         super(name);
-        entityGroup = SsaFactory.createDataWarehouse(name);
+        entityGroup = SsaFactory.createEntity(name, DataWarehouse.class);
     }
     
 }
