@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -36,11 +38,12 @@ public class DefaultExportManager implements ExportManager {
     }
 
     @Override
-    public Node[] getExportButtons(Scene scene, Collection<Entity> entities, Collection<Transition> transitions) {
-        Node pngN = png ? createPngButton(scene) : null;
-        Node pdfN = pdf ? createPdfButton(scene) : null;
-        Node xmlN = xml ? createXmlButton(entities, transitions) : null;
-        return new Node[]{pngN, pdfN, xmlN};
+    public List<Node> getExportButtons(Scene scene, Collection<Entity> entities, Collection<Transition> transitions) {
+        List<Node> nodes = new ArrayList<>();
+        if(png) nodes.add(createPngButton(scene));
+        if(pdf) nodes.add(createPdfButton(scene));
+        if(xml) nodes.add(createXmlButton(entities, transitions));
+        return nodes;
     }
 
     private Button createPngButton(Scene scene) {
